@@ -51,6 +51,7 @@ def multigradiens(i, carry):
         return (a1_bash ,a2_bash ,a3_bash ,a4_bash ,b1_bash ,b2_bash ,b3_bash ,b4_bash, a1 ,a2 ,a3, a4, b1, b2, b3, b4, ti, l)
 
 def print_wate(a1 ,a2 ,a3, a4, b1, b2, b3, b4):
+    print("----network wate----")
     print("a1:" + str(a1))
     print("a2:" + str(a2))
     print("a3:" + str(a3))
@@ -97,7 +98,7 @@ def traning(i, carry):
 ## random nerorns wate
 
 key = jax.random.key(int(time.time()))
-print(key)
+
 a1 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
 a2 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
 a3 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
@@ -106,6 +107,7 @@ b1 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
 b2 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
 b3 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
 b4 = jax.random.uniform(key, shape=(), dtype=None, minval=-1.0, maxval=1.0)
+print_wate(a1 ,a2 ,a3, a4, b1, b2, b3, b4)
 
 #grad_network_a1_test = jax.grad(network_1d)
 #print(grad_network_a1_test)
@@ -137,7 +139,6 @@ print("b4 grad at(" + str(ti) + "):" + str(grad_network_b4_error(a1 ,a2 ,a3, a4,
 ## traning network 
 
 ti = 7.5
-print_wate(a1 ,a2 ,a3, a4, b1, b2, b3, b4)
 
 val = jax.lax.fori_loop(0, 60, tranign_bash, (-0.01, 10, a1 ,a2 ,a3, a4, b1, b2, b3, b4, ti)) 
 lering_rate, bash, a1 ,a2 ,a3, a4, b1, b2, b3, b4, ti = val
