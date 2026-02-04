@@ -58,7 +58,7 @@ grad_to_cartesian_scalar = jax.grad(to_cartesian_scalar)
 g = grad_to_cartesian_scalar(1.0, 1.0)
 grad_data = grad_to_cartesian(polar_data)
 
-sys.exit(1)
+#sys.exit(1)
 
 ## Plot data
 x_vals = jnp.array(cartesian_data[:, 0])
