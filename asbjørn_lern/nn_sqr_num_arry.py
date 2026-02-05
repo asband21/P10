@@ -7,9 +7,6 @@ import jax.numpy as jnp
 def test_funktion(x):
     return 0.1*x*x + x*1.8 - 0.5
 
-def Relu(x):
-    return jnp.maximum(x, 0)
-
 def error(estimated, true):
     return jax.numpy.power((true - estimated), 2)
 
@@ -41,6 +38,16 @@ def net_str_make(n , relu_bool):
     s = "lambda " + s
     return s
 
+def arret_net_fun_maker(n):
+    s = "a2, b2, a1, b1, a0, b0,"
+    s = ""
+    for i in range(n):
+        s = ' a[' + str(i) + "], b[" + str(i) + "]," + s
+
+    s = "lambda a, b, x, f : f(" + s + " x)"
+    f = eval(s)
+    return f
+
 def traning(i, carry):
     a, b, a2, b2, a3, b3, fun_input, true, error_over_time, l = carry
     
@@ -55,17 +62,18 @@ def traning(i, carry):
     error_over_time = error_over_time.at[i].set(net(a, b, a2, b2, a3, b3, fun_input[i], true[i]))
     return (a, b, a2, b2, a3, b3, fun_input, true, error_over_time, l)
 
-n = 1 # nummer of 1d neuron lager
+
+
+n = 3 # nummer of 1d neuron lager
 
 print("--------------")
 print(net_str_make(n, False))
 
 f = eval(net_str_make(n, False))
-print(f(3.0, 4.0, 1.0))
-gd_f = jax.grad(f, 0)
-print(gd_f(3.0, 4.0, 1.0))
+print(f(3.0, 4.0, 3.0, 4.0, 3.0, -4.0, 1.0))
+gd_f = jax.grad(f, 1)
+print(gd_f(3.0, 4.0, 3.0, 4.0, 3.0, -4.0, 1.0))
 
-sys.exit(1)
 
 key = jax.random.key(int(time.time()))
 #key = jax.random.key(10)
@@ -75,6 +83,11 @@ a = jax.random.uniform(k1, shape=(n), minval=-1.0, maxval=1.0)
 key, k2 = jax.random.split(key)
 b = jax.random.uniform(k2, shape=(n), minval=-1.0, maxval=1.0)
 
+aa_net_fun = arret_net_fun_maker(n)
+print(aa_net_fun)
+print(aa_net_fun(a, b, 2 , f))
+
+sys.exit(1)
 ## maked the gradient funksen
 
 
