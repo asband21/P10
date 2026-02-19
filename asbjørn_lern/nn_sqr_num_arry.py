@@ -39,7 +39,15 @@ def net_str_make(n , relu_bool):
     return s
 
 def arret_net_fun_maker(n):
-    s = "a2, b2, a1, b1, a0, b0,"
+    s = ""
+    for i in range(n):
+        s = ' a[' + str(i) + "], b[" + str(i) + "]," + s
+
+    s = "lambda a, b, x, f : f(" + s + " x)"
+    f = eval(s)
+    return f
+
+def arret_grad_net_fun_maker(n):
     s = ""
     for i in range(n):
         s = ' a[' + str(i) + "], b[" + str(i) + "]," + s
@@ -62,18 +70,44 @@ def traning(i, carry):
     error_over_time = error_over_time.at[i].set(net(a, b, a2, b2, a3, b3, fun_input[i], true[i]))
     return (a, b, a2, b2, a3, b3, fun_input, true, error_over_time, l)
 
+def gradien_funksen_list(n , net):
+    nabla = []
+    for i in range(n):
+        nabla.append(jax.grad(net, i*2))
+        nabla.append(jax.grad(net, i*2 + 1))
+    return nabla
 
+def get_gredent(a, b, x, n, f, gradind_funksen_list, arrey_funksen):
+    print(f"a:{a}, b:{b}, x:{x}, n:{n}, gradind_funksen_list:{gradien_funksen_list}")
+    gr = jnp.zeros(n*2)
+    for i in range(n):
+        #gr = gr.at[i*2].set(gradind_funksen_list[i*2](a, b, x, f))
+        #gr = gr.at[i*2 + 1].set(gradind_funksen_list[i*2 + 1](a, b, x, f))
+        
+        #print(gradind_funksen_list[i*2](a, b, x, f))
+        #print(gradind_funksen_list[i*2 + 1](a, b, x, f))
+        
+        print(arrey_funksen(a, b, x, gradind_funksen_list[i*2]) )
+        print(arrey_funksen(a, b, x, gradind_funksen_list[i*2 + 1]))
 
-n = 3 # nummer of 1d neuron lager
+        #gr = gr.at[i*2].set(arrey_funksen(a, b, x, gradind_funksen_list[i*2]) )
+        #gr = gr.at[i*2 + 1].set(arrey_funksen(a, b, x, gradind_funksen_list[i*2 + 1]) )
+        #gr.at[i*2].set[i*2](arrey_funksen(a, b, x, gradind_funksen_list[i*2]))
+        #gr.at[i*2 +1].set[i*2 +1](arrey_funksen(a, b, x, gradind_funksen_list[i*2 + 1]))
+    return gr
+
+n = 30 # nummer of 1d neuron lager
 
 print("--------------")
-print(net_str_make(n, False))
 
-f = eval(net_str_make(n, False))
-print(f(3.0, 4.0, 3.0, 4.0, 3.0, -4.0, 1.0))
-gd_f = jax.grad(f, 1)
-print(gd_f(3.0, 4.0, 3.0, 4.0, 3.0, -4.0, 1.0))
+bool_relu = True
+print(net_str_make(n, bool_relu))
 
+f = eval(net_str_make(n, bool_relu))
+
+#print(f(3.0, 4.0, 3.0, 4.0, 3.0, -4.0, 1.0))
+#gd_f = jax.grad(f, 1)
+#print(gd_f(3.0, 4.0, 3.0, 4.0, 3.0, -4.0, 1.0))
 
 key = jax.random.key(int(time.time()))
 #key = jax.random.key(10)
@@ -85,7 +119,27 @@ b = jax.random.uniform(k2, shape=(n), minval=-1.0, maxval=1.0)
 
 aa_net_fun = arret_net_fun_maker(n)
 print(aa_net_fun)
-print(aa_net_fun(a, b, 2 , f))
+print(aa_net_fun(a, b, 2.2 , f))
+
+
+gra_fun_list = gradien_funksen_list(n , aa_net_fun)
+gra_fun_list = gradien_funksen_list(n , f)
+
+print(gra_fun_list[1])
+print("print v gradiend")
+#print(gra_fun_list[1](a, b, 2.2, f))
+print("----- A --------")
+
+
+
+#sys.exit(1)
+
+
+ggg = get_gredent(a, b, 2.2, n, f, gra_fun_list, aa_net_fun)
+print(ggg)
+
+
+
 
 sys.exit(1)
 ## maked the gradient funksen
