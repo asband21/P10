@@ -55,26 +55,27 @@ def arret_grad_net_fun_maker(n):
     s = "lambda a, b, x, f : f(" + s + " x)"
     f = eval(s)
     return f
-"""
+
 def traning(i, carry):
-    a, b, n, fun_input, true, error_over_time, lerning_rede,  = carry
-    g = get_gredent(a, b, 2.2, n, f, gra_fun_list, aa_net_fun)
+    a, b, n, fun_input, true, error_over_time, lerning_rede, f, gra_fun_list, aa_net_fun  = carry
+    a = a + l*get_gredent_a(a, b, 2.2, n, f, gra_fun_list, aa_net_fun)
+    b = b + l*get_gredent_b(a, b, 2.2, n, f, gra_fun_list, aa_net_fun)
+    
+    #ggg = get_gredent(a, b, 2.2, n, f, gra_fun_list, aa_net_fun)
 
-    for i in range(n):
-
-
-    return (a, b, fun_input, true, error_over_time, lerning_rede)
-    a  = a  - l*grad_network_a_error( a, b, a2, b2, a3, b3, fun_input[i], true[i])
-    b  = b  - l*grad_network_b_error( a, b, a2, b2, a3, b3, fun_input[i], true[i])
-    a2 = a2 - l*grad_network_a2_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
-    b2 = b2 - l*grad_network_b2_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
-    a3 = a3 - l*grad_network_a3_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
-    b3 = b3 - l*grad_network_b3_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
+    return (a, b, n, fun_input, true, error_over_time, lerning_rede, f, gra_fun_list, aa_net_fun)
+    
+    #a  = a  - l*grad_network_a_error( a, b, a2, b2, a3, b3, fun_input[i], true[i])
+    #b  = b  - l*grad_network_b_error( a, b, a2, b2, a3, b3, fun_input[i], true[i])
+    #a2 = a2 - l*grad_network_a2_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
+    #b2 = b2 - l*grad_network_b2_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
+    #a3 = a3 - l*grad_network_a3_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
+    #b3 = b3 - l*grad_network_b3_error(a, b, a2, b2, a3, b3, fun_input[i], true[i])
     
     #jax.debug.print("a:{} b:{} a_m:{} b_m:{}", a, b, a_m, b_m)
-    error_over_time = error_over_time.at[i].set(net(a, b, a2, b2, a3, b3, fun_input[i], true[i]))
-    return (a, b, a2, b2, a3, b3, fun_input, true, error_over_time, l)
-"""
+    #error_over_time = error_over_time.at[i].set(net(a, b, a2, b2, a3, b3, fun_input[i], true[i]))
+    #return (a, b, a2, b2, a3, b3, fun_input, true, error_over_time, l)
+
 def gradien_funksen_list(n , net):
     nabla = []
     for i in range(n):
@@ -89,6 +90,19 @@ def get_gredent(a, b, x, n, f, gradind_funksen_list, arrey_funksen):
         gr = gr.at[i*2].set(arrey_funksen(a, b, x, gradind_funksen_list[i*2]))
         gr = gr.at[i*2+1].set(arrey_funksen(a, b, x, gradind_funksen_list[i*2+1]))
     return gr
+
+def get_gredent_a(a, b, x, n, f, gradind_funksen_list, arrey_funksen):
+    gr = jnp.zeros(n)
+    for i in range(n):
+        gr = gr.at[i].set(arrey_funksen(a, b, x, gradind_funksen_list[i*2]))
+    return gr
+
+def get_gredent_b(a, b, x, n, f, gradind_funksen_list, arrey_funksen):
+    gr = jnp.zeros(n)
+    for i in range(n):
+        gr = gr.at[i].set(arrey_funksen(a, b, x, gradind_funksen_list[i*2 + 1]))
+    return gr
+
 
 n = 10 # nummer of 1d neuron lager
 
@@ -122,6 +136,12 @@ print(ggg)
 
 ### gradient traning error
 
+#carry = (a, b, n, fun_input, true, error_over_time, lerning_rede, f, gra_fun_list, aa_net_fun)
+
+carry = (a, b, n, fun_input, true, error_over_time, lerning_rede, f, gra_fun_list, aa_net_fun)
+
+val = jax.lax.fori_loop(0, num, traning, carry) 
+a, b, a2, b2, a3, b3, sam, true, error_over_time, l = val
 
 
 
