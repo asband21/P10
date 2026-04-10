@@ -16,20 +16,25 @@ key = jax.random.key(int(time.time()))
 key, k1 = jax.random.split(key)
 
 number_of_mic_rum = 10
-room_dimesen = jax.random.uniform(k1, shape=(number_of_mic_rum, 3), minval=5.0, maxval=10.0)
-print(room_dimesen[0])
+#rum høj 2.3 m til 4 m
+#rum mick høj .03
+# min dim 3 m  
+room_dimesen = jax.random.uniform(k1, shape=(number_of_mic_rum, 3), minval=3, maxval=10.0)
 
 
+key, k3 = jax.random.split(key)
+mic_positions = jax.random.uniform(k3, shape=(number_of_mic_rum, 3), minval=jnp.zeros((number_of_mic_rum, 3)), maxval=room_dimesen,)
 
 # The desired reverberation time and dimensions of the room
-rt60_tgt = 0.3  # seconds
-room_dim = room_dimesen[0].tolist()
+rt60_tgt = 1.8  # seconds
 
+room_dim = room_dimesen[0].tolist()
 
 # import a mono wavfile as the source signal
 # the sampling frequency should match that of the room
 fs, audio = wavfile.read("damer.wav")
-
+#fs, audio = wavfile.read("Noctule_50hz_tail.wav")
+#fs, audio = wavfile.read("Noctule_kort.wav")
 # We invert Sabine's formula to obtain the parameters for the ISM simulator
 e_absorption, max_order = pra.inverse_sabine(rt60_tgt, room_dim)
 
@@ -43,12 +48,21 @@ src_orientation = DirectionVector(azimuth=0, colatitude=90, degrees=True)
 src_directivity = Cardioid(orientation=src_orientation)
 
 # place the source in the room
-room.add_source([2.5, 3.73, 1.76], signal=audio, delay=0.5)
+#room.add_source([2.5, 3.73, 1.76], signal=audio, delay=0.5)
+room.add_source(mic_positions[0], signal=audio, delay=0.5)
 
 # define the locations of the microphones
 
+dl = mic_positions[0].tolist() 
+dl_1 = dl.copy() 
+dl_2 = dl.copy()
+dl_1[1] = dl[1] + 0.05 
+dl_2[1] = dl[1] - 0.05 
+print(dl_1)
+print(dl_2)
+
 mic_locs = np.c_[
-    [6.3, 4.87, 1.2], [6.3, 4.93, 1.2],  # mic 1  # mic 2
+    dl_1, dl_2,  # mic 1  # mic 2
 ]
 #mic_locs = np.c_[[6.3, 4.87, 1.2] , ]
 
@@ -59,7 +73,7 @@ room.add_microphone_array(mic_locs)
 room.simulate()
 
 room.mic_array.to_wav(
-    "damer_reverb.wav",
+    "Noctule_50hz_tail_echo.wav",
     norm=True,
     bitdepth=np.int16,
 )
