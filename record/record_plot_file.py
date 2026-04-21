@@ -3,7 +3,7 @@ import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
-sr, x = wavfile.read(sound_path)
+sr, x = wavfile.read("chunk.wav")
 
 
 audio = np.frombuffer(x, dtype=np.int16)
