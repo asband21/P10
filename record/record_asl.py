@@ -5,7 +5,8 @@ import sys
 
 # Settings
 CHANNELS = 1
-RATE = 96000
+#RATE = 96000
+RATE = 200000
 FORMAT = alsaaudio.PCM_FORMAT_S16_LE  # 16-bit little-endian
 PERIOD_SIZE = 1024  # frames per read
 
