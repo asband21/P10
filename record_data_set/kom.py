@@ -26,11 +26,11 @@ inp = alsaaudio.PCM(
     periodsize=PERIODSIZE,
 )
 
-for iii in range(44):
-    subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dh"], check=True)
+for iii in range(5):
     chunks = []
     num_reads = int(RATE * SECONDS / PERIODSIZE)
 
+    subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dh"], check=True)
     for _ in range(num_reads):
         length, data = inp.read()
         if length > 0:
@@ -40,6 +40,7 @@ for iii in range(44):
     subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dl"], check=True)
 
     audio = np.concatenate(chunks)
-    wavfile.write(f"chunk_{iii}.wav", RATE, audio)
+    wavfile.write(f"data_set/chunk_{iii}.wav", RATE, audio)
 
+subprocess.run(["bash", "spektrum.sh"], check=True)
 inp.close()
