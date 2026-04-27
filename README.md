@@ -6,6 +6,7 @@ python krav:
 - scipy
 - json
 - sounddevice
+- gpiozero
 
 i mappen archive\_1 gemmes dette https://www.kaggle.com/datasets/7ef7c469dbe40a4e85aade2082c3e9c56a2adebfe5b54f39f85d8533f1222ae9
 
