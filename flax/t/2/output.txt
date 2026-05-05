@@ -1,0 +1,169 @@
+(.venv) klyx@8D:~/git/p10/P10/flax$ python eksampel_fft_3.py 
+WARNING:2026-05-05 15:13:37,027:jax._src.xla_bridge:794: An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+WARNING:jax._src.xla_bridge:An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+SimpleNN( # Param: 836,926,991 (3.3 GB)
+  n_features=57720,
+  layer0=Linear( # Param: 832,914,030 (3.3 GB)
+    kernel=Param( # 832,899,600 (3.3 GB)
+      value=Array(shape=(57720, 14430), dtype=dtype('float32'))
+    ),
+    bias=Param( # 14,430 (57.7 KB)
+      value=Array(shape=(14430,), dtype=dtype('float32'))
+    ),
+    in_features=57720,
+    out_features=14430,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  layer1=Linear( # Param: 3,679,905 (14.7 MB)
+    kernel=Param( # 3,679,650 (14.7 MB)
+      value=Array(shape=(14430, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=14430,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  layer2=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  layer3=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  layer4=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  layer5=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  layer6=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  ),
+  output=Linear( # Param: 6,656 (26.6 KB)
+    kernel=Param( # 6,630 (26.5 KB)
+      value=Array(shape=(255, 26), dtype=dtype('float32'))
+    ),
+    bias=Param( # 26 (104 B)
+      value=Array(shape=(26,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=26,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f4cca188550>,
+    bias_init=<function zeros at 0x7f4cc962e290>,
+    dot_general=<function dot_general at 0x7f4cc9b301f0>,
+    promote_dtype=<function promote_dtype at 0x7f4cca1881f0>
+  )
+)
+/home/klyx/git/p10/P10/.venv/lib/python3.10/site-packages/jax/_src/numpy/array.py:268: ComplexWarning: Casting complex values to real discards the imaginary part
+  out_array: Array = lax._convert_element_type(
+(57720,)
+epoch 0: loss=3.66
+epoch 20: loss=3.71
+epoch 40: loss=3.82
+epoch 60: loss=3.89
+epoch 80: loss=3.94
+epoch 100: loss=3.98
+epoch 120: loss=4.02
+epoch 140: loss=4.05
+epoch 160: loss=4.08
+epoch 180: loss=4.10
+epoch 200: loss=4.13
+epoch 220: loss=4.15
+epoch 240: loss=4.17
+epoch 260: loss=4.18
+epoch 280: loss=4.20
+45 labels match out of 251: accuracy = 17.928287%
