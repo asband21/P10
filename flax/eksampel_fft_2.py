@@ -16,10 +16,25 @@ def lode_data(split: float = 0.1):
         x = x.astype("float32")
         x = x / (32768.0/2)
         #x = x / 32768.0
+        
+        #print(jnp.shape(x))
+        #print(x_spl[0])
+        x_spl = jnp.split(x, len(x)/1024)
+        x_fft = []
+        for i_x in x_spl:
+            x_fft.append(jnp.fft.fft(i_x))
+
+        print(jnp.shape(x_fft))
         images.append(x)
         labels.append(int(i[0]))
         #print(len(x))
     images = jnp.asarray(images, dtype=jnp.float32)
+    print(images)
+    print(jnp.shape(images))
+    print(images[0])
+    print(jnp.shape(images[0]))
+    print(images[0][0])
+    print(jnp.shape(images[0][0]))
     labels = jnp.asarray(labels, dtype=jnp.int32)
     unique_labels, mapped_labels = jnp.unique(labels, return_inverse=True)
     #images = jnp.array(images)
@@ -76,9 +91,9 @@ class SimpleNN(nnx.Module):
     #    self.layer2 = nnx.Linear(n_hidden_h, 4, rngs=rngs)
     #    self.layer3 = nnx.Linear(n_hidden_h, 1, rngs=rngs)
     def __init__(self, n_features: int = 113664, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
-        self.layer1 = nnx.Linear(n_features, n_hidden, rngs=rngs)
-        #self.layer1 = nnx.Linear(n_features, n_features, rngs=rngs)
-        self.layer2 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
+        #self.layer0 = nnx.Linear(n_features, n_features/2, rngs=rngs)
+        self.layer1 = nnx.Linear(n_features, n_hidden*10, rngs=rngs)
+        self.layer2 = nnx.Linear(n_hidden*10, n_hidden, rngs=rngs)
         self.layer3 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.layer4 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.layer5 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
@@ -87,6 +102,7 @@ class SimpleNN(nnx.Module):
 
     def __call__(self, x):
         #x = x.reshape(x.shape[0], self.n_features) # Flatten images.
+        #x = nnx.selu(self.layer0(x))
         x = nnx.selu(self.layer1(x))
         x = nnx.selu(self.layer2(x))
         x = nnx.selu(self.layer3(x))
@@ -149,25 +165,24 @@ class ConvNet(nnx.Module):
 model = SimpleNN(rngs=nnx.Rngs(0))
 #model = ConvNet(rngs=nnx.Rngs(0))
 
-#nnx.display(model)  # Interactive display if penzai is installed.
+nnx.display(model)  # Interactive display if penzai is installed.
 
 #ckpt_dir = ocp.test_utils.erase_and_create_empty('./model/')
-ckpt_dir = (Path.cwd() / "model" / "state").resolve()
+ckpt_dir = (Path.cwd() / "model_fft" / "state").resolve()
 #ckpt_dir = ocp.test_utils.erase_and_create_empty('/tmp/my-checkpoints/')
 checkpointer = ocp.StandardCheckpointer()
 
 #optimizer = nnx.ModelAndOptimizer(model, optax.sgd(learning_rate=0.03))
-optimizer = nnx.Optimizer( model, optax.sgd(learning_rate=0.03), wrt=nnx.Param,)
-
+optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=0.03), wrt=nnx.Param, )
 
 images_train, label_train, images_test, label_test, mapped_labels = lode_data()
 #print(label_train)
 #print(mapped_labels)
 
-for i in range(300):  # 300 training epochs
+for i in range(10000):  # 300 training epochs
     train_step(model, optimizer, images_train, label_train)
     #print(i)
-    if i % 20 == 0:  # Print metrics.
+    if i % 50 == 0:  # Print metrics.
         loss, _ = loss_fun(model, images_test, label_test)
         print(f"epoch {i}: loss={loss:.2f}")
 
