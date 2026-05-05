@@ -1,4 +1,5 @@
 import jax
+import time
 import optax
 from flax import nnx
 import jax.numpy as jnp
@@ -110,7 +111,10 @@ model = SimpleNN(rngs=nnx.Rngs(0))
 
 nnx.display(model)  # Interactive display if penzai is installed.
 
-ckpt_dir = (Path.cwd() / "model_fft" / "state").resolve()
+run_id = int(time.time())
+run_dir = Path.cwd() / "model_fft" / str(run_id)
+#ckpt_dir = (Path.cwd() / "model_fft" / "state").resolve()
+
 checkpointer = ocp.StandardCheckpointer()
 optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=0.02), wrt=nnx.Param, )
 
@@ -129,7 +133,15 @@ accuracy = num_matches / num_total
 print(f"{num_matches} labels match out of {num_total}:"
       f" accuracy = {num_matches/num_total:%}")
 
+
 _, state = nnx.split(model)
-checkpointer.save(ckpt_dir / 'state', state)
+run_dir.mkdir(parents=True, exist_ok=False)
+checkpointer.save(run_dir / "state", state)
 checkpointer.wait_until_finished()
+
+print(f"Saved checkpoint to: {run_dir}")
+
+#checkpointer.save(ckpt_dir / 'state', state)
+#checkpointer.wait_until_finished()
+
 
