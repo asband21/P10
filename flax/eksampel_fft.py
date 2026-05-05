@@ -12,11 +12,18 @@ def lode_data(split: float = 0.1):
     images = []
     labels  = []
     for i in rows:
+
         sr, x = wavfile.read("../data_set/" + i[3])
         x = x.astype("float32")
         x = x / (32768.0)
-        x_spl = jnp.split(x, len(x)/1024)
+        chunk_size = 1024
+        x = x[:len(x) // 3]
+        n_chunks = len(x) // chunk_size
+        x = x[:n_chunks * chunk_size]
+        x_spl = jnp.array(x).reshape(n_chunks, chunk_size)
+        #x_spl = jnp.split(x, len(x)/1024)
         x_fft = []
+        
         for i_x in x_spl:
             #x_fft.append(jnp.fft.fft(i_x))
             x_fft.append(jnp.fft.rfft(i_x))
@@ -90,7 +97,7 @@ class SimpleNN(nnx.Module):
     #    self.layer2 = nnx.Linear(n_hidden_h, 4, rngs=rngs)
     #    self.layer3 = nnx.Linear(n_hidden_h, 1, rngs=rngs)
     #def __init__(self, n_features: int = 113664, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
-    def __init__(self, n_features: int = 56943, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
+    def __init__(self, n_features: int = 18981, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
         self.n_features = n_features 
         self.layer1 = nnx.Linear(n_features, n_hidden, rngs=rngs)
         #self.layer1 = nnx.Linear(n_features, n_features, rngs=rngs)
@@ -178,7 +185,7 @@ images_train, label_train, images_test, label_test, mapped_labels = lode_data()
 #print(label_train)
 #print(mapped_labels)
 
-for i in range(300):  # 300 training epochs
+for i in range(100):  # 300 training epochs
     train_step(model, optimizer, images_train, label_train)
     #print(i)
     if i % 20 == 0:  # Print metrics.
