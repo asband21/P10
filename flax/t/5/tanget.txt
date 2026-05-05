@@ -1,0 +1,1 @@
+ It seems like this parameter is not the right way. Overtraining, overtraining, even with a bit more parameters, I don't think it's the right way we have to handle in the other way. I'm gonna look at the different chunk sizes as the next thing. I'm gonna do some tests. Go on, Fourier transforms tests.

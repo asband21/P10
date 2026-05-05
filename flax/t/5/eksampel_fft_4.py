@@ -7,7 +7,7 @@ from pathlib import Path
 from scipy.io import wavfile
 import orbax.checkpoint as ocp
 
-def lode_data(split: float = 0.1, chunk_size: int = 256):
+def lode_data(split: float = 0.1):
     with open("../data_set/data_set_3.csv", "r") as f:
         rows = [line.strip().split("\t") for line in f]
     images = []
@@ -16,19 +16,18 @@ def lode_data(split: float = 0.1, chunk_size: int = 256):
         sr, x = wavfile.read("../data_set/" + i[3])
         x = x.astype("float32")
         x = x / 32768.0
+        chunk_size = int(1024/4)
         x = x[:len(x) // 3]
         n_chunks = len(x) // chunk_size
         x = x[:n_chunks * chunk_size]
         x_spl = jnp.array(x).reshape(n_chunks, chunk_size)
 
-        """
+        #x_spl = jnp.split(x, len(x)/1024)
         x_fft = []
         for i_x in x_spl:
             x_fft.append(jnp.fft.rfft(i_x))
+
         x_fft = jnp.array(x_fft)
-        """
-        x_fft = jnp.fft.rfft(x_spl, axis=-1)
-        #x_spl = jnp.asarray(x_spl)
         x_fft = x_fft.flatten()
         images.append(x_fft)
         labels.append(int(i[0]))
@@ -44,7 +43,7 @@ def lode_data(split: float = 0.1, chunk_size: int = 256):
     labels = jnp.asarray(labels, dtype=jnp.int32)
     unique_labels, mapped_labels = jnp.unique(labels, return_inverse=True)
     images_train, label_train, images_test, label_test = jax_train_test_split(images, mapped_labels, test_fraction=split, seed=3452)
-    return images_train, label_train, images_test, label_test, mapped_labels, n_chunks
+    return images_train, label_train, images_test, label_test, mapped_labels
 
 def loss_fun(model: nnx.Module, data: jax.Array, labels: jax.Array):
     logits = model(data)
@@ -83,7 +82,7 @@ def jax_train_test_split(features, labels, test_fraction=0.25, seed=0):
     return features_train, labels_train, features_test, labels_test
 
 class SimpleNN(nnx.Module):
-    def __init__(self, n_features: int = 19200, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
+    def __init__(self, n_features: int = 18981, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
         self.n_features = n_features
         self.layer0 = nnx.Linear(n_features, n_features, rngs=rngs)
         #self.layer00 = nnx.Linear(n_features, int(n_features/3), rngs=rngs)
@@ -109,10 +108,8 @@ class SimpleNN(nnx.Module):
         #x = self.layer3(x)
         return x
 
-chunk_size = 768
-images_train, label_train, images_test, label_test, mapped_labels, n_chunks = lode_data(chunk_size = chunk_size)
 
-model = SimpleNN(n_features = n_chunks * (chunk_size // 2 + 1), rngs=nnx.Rngs(0))
+model = SimpleNN(rngs=nnx.Rngs(0))
 
 nnx.display(model)  # Interactive display if penzai is installed.
 
@@ -123,10 +120,11 @@ run_dir = Path.cwd() / "model_fft" / str(run_id)
 checkpointer = ocp.StandardCheckpointer()
 optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=0.02), wrt=nnx.Param, )
 
+images_train, label_train, images_test, label_test, mapped_labels = lode_data()
 
-for i in range(100):  # 300 training epochs
+for i in range(1000):  # 300 training epochs
     train_step(model, optimizer, images_train, label_train)
-    if i % 4 == 0:  # Print metrics.
+    if i % 20 == 0:  # Print metrics.
         loss, _ = loss_fun(model, images_test, label_test)
         print(f"epoch {i}: loss={loss:.2f}")
 
@@ -138,10 +136,10 @@ print(f"{num_matches} labels match out of {num_total}:"
       f" accuracy = {num_matches/num_total:%}")
 
 
-#_, state = nnx.split(model)
-#run_dir.mkdir(parents=True, exist_ok=False)
-#checkpointer.save(run_dir / "state", state)
-#checkpointer.wait_until_finished()
+_, state = nnx.split(model)
+run_dir.mkdir(parents=True, exist_ok=False)
+checkpointer.save(run_dir / "state", state)
+checkpointer.wait_until_finished()
 
 print(f"Saved checkpoint to: {run_dir}")
 

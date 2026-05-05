@@ -1,0 +1,222 @@
+klyx@8D:~/git/p10/P10/flax$ python3 eksampel_fft_4.py 
+SimpleNN( # Param: 482,343,152 (1.9 GB)
+  n_features=18981,
+  layer0=Linear( # Param: 360,297,342 (1.4 GB)
+    kernel=Param( # 360,278,361 (1.4 GB)
+      value=Array(shape=(18981, 18981), dtype=dtype('float32'))
+    ),
+    bias=Param( # 18,981 (75.9 KB)
+      value=Array(shape=(18981,), dtype=dtype('float32'))
+    ),
+    in_features=18981,
+    out_features=18981,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer00=Linear( # Param: 120,099,114 (480.4 MB)
+    kernel=Param( # 120,092,787 (480.4 MB)
+      value=Array(shape=(18981, 6327), dtype=dtype('float32'))
+    ),
+    bias=Param( # 6,327 (25.3 KB)
+      value=Array(shape=(6327,), dtype=dtype('float32'))
+    ),
+    in_features=18981,
+    out_features=6327,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer1=Linear( # Param: 1,613,640 (6.5 MB)
+    kernel=Param( # 1,613,385 (6.5 MB)
+      value=Array(shape=(6327, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=6327,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer2=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer3=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer4=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer5=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  layer6=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  ),
+  output=Linear( # Param: 6,656 (26.6 KB)
+    kernel=Param( # 6,630 (26.5 KB)
+      value=Array(shape=(255, 26), dtype=dtype('float32'))
+    ),
+    bias=Param( # 26 (104 B)
+      value=Array(shape=(26,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=26,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fb292da9cf0>,
+    bias_init=<function zeros at 0x7fb291efb760>,
+    dot_general=<function dot_general at 0x7fb29276d750>,
+    promote_dtype=<function promote_dtype at 0x7fb292da9c60>
+  )
+)
+/home/klyx/.local/lib/python3.10/site-packages/jax/_src/numpy/array.py:268: ComplexWarning: Casting complex values to real discards the imaginary part
+  out_array: Array = lax._convert_element_type(
+(2510, 18981)
+(18981,)
+2026-05-05 17:13:17.163320: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 1.83GiB (1964153872 bytes) by rematerialization; only reduced to 3.57GiB (3836965940 bytes), down from 3.57GiB (3836991264 bytes) originally
+2026-05-05 17:13:21.186053: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+epoch 0: loss=4.15
+epoch 20: loss=4.80
+epoch 40: loss=3.46
+epoch 60: loss=3.56
+epoch 80: loss=3.60
+epoch 100: loss=3.63
+epoch 120: loss=3.65
+epoch 140: loss=3.67
+epoch 160: loss=3.69
+epoch 180: loss=3.71
+epoch 200: loss=3.72
+epoch 220: loss=3.73
+epoch 240: loss=3.75
+epoch 260: loss=3.76
+epoch 280: loss=3.77
+epoch 300: loss=3.78
+epoch 320: loss=3.79
+epoch 340: loss=3.79
+epoch 360: loss=3.80
+epoch 380: loss=3.81
+epoch 400: loss=3.81
+epoch 420: loss=3.82
+epoch 440: loss=3.83
+epoch 460: loss=3.83
+epoch 480: loss=3.84
+epoch 500: loss=3.85
+epoch 520: loss=3.85
+epoch 540: loss=3.86
+epoch 560: loss=3.86
+epoch 580: loss=3.87
+epoch 600: loss=3.87
+epoch 620: loss=3.88
+epoch 640: loss=3.88
+epoch 660: loss=3.88
+epoch 680: loss=3.89
+epoch 700: loss=3.89
+epoch 720: loss=3.90
+epoch 740: loss=3.90
+epoch 760: loss=3.90
+epoch 780: loss=3.91
+epoch 800: loss=3.91
+epoch 820: loss=3.92
+epoch 840: loss=3.92
+epoch 860: loss=3.92
+epoch 880: loss=3.93
+epoch 900: loss=3.93
+epoch 920: loss=3.93
+epoch 940: loss=3.94
+epoch 960: loss=3.94
+epoch 980: loss=3.94

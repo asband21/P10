@@ -1,0 +1,181 @@
+klyx@8D:~/git/p10/P10/flax$ python3 eksampel_fft_4.py 
+SimpleNN( # Param: 373,888,511 (1.5 GB)
+  n_features=19200,
+  layer0=Linear( # Param: 368,659,200 (1.5 GB)
+    kernel=Param( # 368,640,000 (1.5 GB)
+      value=Array(shape=(19200, 19200), dtype=dtype('float32'))
+    ),
+    bias=Param( # 19,200 (76.8 KB)
+      value=Array(shape=(19200,), dtype=dtype('float32'))
+    ),
+    in_features=19200,
+    out_features=19200,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  layer1=Linear( # Param: 4,896,255 (19.6 MB)
+    kernel=Param( # 4,896,000 (19.6 MB)
+      value=Array(shape=(19200, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=19200,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  layer2=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  layer3=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  layer4=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  layer5=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  layer6=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  ),
+  output=Linear( # Param: 6,656 (26.6 KB)
+    kernel=Param( # 6,630 (26.5 KB)
+      value=Array(shape=(255, 26), dtype=dtype('float32'))
+    ),
+    bias=Param( # 26 (104 B)
+      value=Array(shape=(26,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=26,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ffa48885cf0>,
+    bias_init=<function zeros at 0x7ffa479cf760>,
+    dot_general=<function dot_general at 0x7ffa48241750>,
+    promote_dtype=<function promote_dtype at 0x7ffa48885c60>
+  )
+)
+/home/klyx/.local/lib/python3.10/site-packages/jax/_src/numpy/array.py:268: ComplexWarning: Casting complex values to real discards the imaginary part
+  out_array: Array = lax._convert_element_type(
+(2510, 19200)
+(19200,)
+2026-05-05 18:12:02.512982: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 2.59GiB (2786529219 bytes) by rematerialization; only reduced to 2.93GiB (3147799704 bytes), down from 2.93GiB (3147799704 bytes) originally
+2026-05-05 18:12:05.564616: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+epoch 0: loss=3.68
+epoch 4: loss=3.49
+epoch 8: loss=3.42
+epoch 12: loss=3.38
+epoch 16: loss=3.39
+epoch 20: loss=3.39
+epoch 24: loss=3.40
+epoch 28: loss=3.41
+epoch 32: loss=3.41
+epoch 36: loss=3.42
+epoch 40: loss=3.43
+epoch 44: loss=3.44
+epoch 48: loss=3.45
+epoch 52: loss=3.45
+epoch 56: loss=3.46
+epoch 60: loss=3.47
+epoch 64: loss=3.47
+epoch 68: loss=3.48
+epoch 72: loss=3.49
+epoch 76: loss=3.49
+epoch 80: loss=3.50
+epoch 84: loss=3.50
+epoch 88: loss=3.51
+epoch 92: loss=3.52
+epoch 96: loss=3.52
+44 labels match out of 251: accuracy = 17.529881%
+Saved checkpoint to: /home/klyx/git/p10/P10/flax/model_fft/1777997348
