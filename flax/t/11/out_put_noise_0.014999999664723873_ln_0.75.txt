@@ -1,0 +1,9 @@
+noise	0.014999999664723873	ln	0.75
+4.687177
+nan
+nan
+nan
+nan
+nan
+nan
+nan
