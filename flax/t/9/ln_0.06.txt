@@ -1,0 +1,252 @@
+(2510, 19200)
+(19200,)
+SimpleNN( # Param: 373,888,511 (1.5 GB)
+  n_features=19200,
+  layer0=Linear( # Param: 368,659,200 (1.5 GB)
+    kernel=Param( # 368,640,000 (1.5 GB)
+      value=Array(shape=(19200, 19200), dtype=dtype('float32'))
+    ),
+    bias=Param( # 19,200 (76.8 KB)
+      value=Array(shape=(19200,), dtype=dtype('float32'))
+    ),
+    in_features=19200,
+    out_features=19200,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  layer1=Linear( # Param: 4,896,255 (19.6 MB)
+    kernel=Param( # 4,896,000 (19.6 MB)
+      value=Array(shape=(19200, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=19200,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  layer2=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  layer3=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  layer4=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  layer5=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  layer6=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  ),
+  output=Linear( # Param: 6,656 (26.6 KB)
+    kernel=Param( # 6,630 (26.5 KB)
+      value=Array(shape=(255, 26), dtype=dtype('float32'))
+    ),
+    bias=Param( # 26 (104 B)
+      value=Array(shape=(26,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=26,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7fefe1a89c60>,
+    bias_init=<function zeros at 0x7fefe0bcf760>,
+    dot_general=<function dot_general at 0x7fefe1441750>,
+    promote_dtype=<function promote_dtype at 0x7fefe1a89bd0>
+  )
+)
+epoch 0: loss=3.78
+epoch 4: loss=4.03
+epoch 8: loss=3.99
+epoch 12: loss=3.67
+epoch 16: loss=3.62
+epoch 20: loss=3.64
+epoch 24: loss=3.66
+epoch 28: loss=3.68
+epoch 32: loss=3.69
+epoch 36: loss=3.71
+epoch 40: loss=3.72
+epoch 44: loss=3.73
+epoch 48: loss=3.74
+epoch 52: loss=3.76
+epoch 56: loss=3.77
+epoch 60: loss=3.78
+epoch 64: loss=3.79
+epoch 68: loss=3.79
+epoch 72: loss=3.80
+epoch 76: loss=3.81
+epoch 80: loss=3.82
+epoch 84: loss=3.83
+epoch 88: loss=3.83
+epoch 92: loss=3.84
+epoch 96: loss=3.85
+epoch 100: loss=3.85
+epoch 104: loss=3.86
+epoch 108: loss=3.87
+epoch 112: loss=3.87
+epoch 116: loss=3.88
+epoch 120: loss=3.89
+epoch 124: loss=3.89
+epoch 128: loss=3.90
+epoch 132: loss=3.90
+epoch 136: loss=3.91
+epoch 140: loss=3.91
+epoch 144: loss=3.92
+epoch 148: loss=3.92
+epoch 152: loss=3.93
+epoch 156: loss=3.93
+epoch 160: loss=3.94
+epoch 164: loss=3.94
+epoch 168: loss=3.95
+epoch 172: loss=3.95
+epoch 176: loss=3.95
+epoch 180: loss=3.96
+epoch 184: loss=3.96
+epoch 188: loss=3.97
+epoch 192: loss=3.97
+epoch 196: loss=3.97
+36 labels match out of 251: accuracy = 14.342630%
+Saved checkpoint to: /home/klyx/git/p10/P10/flax/model_fft/1778072217
+	0.06
+3.7798243
+4.030151
+3.989364
+3.6742556
+3.6206584
+3.6393328
+3.6578994
+3.6755648
+3.6915941
+3.7066994
+3.7203276
+3.7328062
+3.7445533
+3.7556853
+3.766266
+3.7762094
+3.7854903
+3.7944608
+3.80295
+3.8110898
+3.8189921
+3.826736
+3.8341172
+3.8412828
+3.8482854
+3.85497
+3.8616133
+3.8679922
+3.8742993
+3.8804705
+3.8863852
+3.89225
+3.8977826
+3.9032524
+3.9085293
+3.9135695
+3.9185696
+3.923516
+3.9283013
+3.9328876
+3.9374626
+3.941981
+3.9463646
+3.9506497
+3.9549804
+3.9590738
+3.9631853
+3.9671054
+3.9711258
+3.9749339

@@ -1,0 +1,1 @@
+One to think, the match noise out of the depth and size of the network doesn't seem to be specifically super-optimized. Other suggestions might be looked at, RTNNs and similar, theory guess with breadth and depth. Maybe we should look into some frequency range.
