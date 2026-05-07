@@ -80,11 +80,11 @@ def jax_train_test_split(features, labels, test_fraction=0.25, seed=0):
     return features_train, labels_train, features_test, labels_test
 
 class CNN(nnx.Module):
-    def __init__(self,  l: int = 300, h: int = 64, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
-        self.layer0 = nnx.Conv(in_features=1, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer1 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer2 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer3 = nnx.Conv(in_features=8, out_features=1, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+    def __init__(self,  l: int = 300, h: int = 64, n_hidden: int = 255, n_targets: int = 26, out_feat: int = 8, *, rngs: nnx.Rngs):
+        self.layer0 = nnx.Conv(in_features=1, out_features=out_feat, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        self.layer1 = nnx.Conv(in_features=out_feat, out_features=out_feat, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        self.layer2 = nnx.Conv(in_features=out_feat, out_features=out_feat, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        self.layer3 = nnx.Conv(in_features=out_feat, out_features=1, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer4 = nnx.Linear((l - 4*4) * (h - 4*4), n_hidden, rngs=rngs)
         #self.layer4 = nnx.Linear((l - 2*4) * (h - 2*4), n_hidden, rngs=rngs)
         self.layer5 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
@@ -104,7 +104,7 @@ class CNN(nnx.Module):
         return x
 
 chunk_size = 126
-noise = 0.01
+noise = 0.10
 l_r=0.01
 
 
@@ -113,7 +113,7 @@ images_train, label_train, images_test, label_test, mapped_labels, n_chunks = lo
 
 shape = jnp.shape(images_test)
 print(shape)
-model = CNN(rngs=nnx.Rngs(0), l = shape[1], h = shape[2] )
+model = CNN(rngs=nnx.Rngs(0), l = shape[1], h = shape[2], out_feat=32 )
 
 nnx.display(model)  # Interactive display if penzai is installed.
 
@@ -133,10 +133,10 @@ optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=l_r), wrt=nnx.Param, )
 key = jax.random.key(int(time.time()))
 
 loserade = []
-for i in range(350):  # 300 training epochs
+for i in range(150):  # 300 training epochs
     key, k = jax.random.split(key)
-    #noisy_images_train = images_train + jax.random.normal(k, shape=images_train.shape, dtype=images_train.dtype) * noise
-    train_step(model, optimizer, images_train , label_train)
+    noisy_images_train = images_train + jax.random.normal(k, shape=images_train.shape, dtype=images_train.dtype) * noise
+    train_step(model, optimizer, noisy_images_train , label_train)
     if i % 4 == 0:  # Print metrics.
         loss, _ = loss_fun(model, images_test, label_test)
         loserade.append(loss)
