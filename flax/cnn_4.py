@@ -43,7 +43,7 @@ def loss_fun(model: nnx.Module, data: jax.Array, labels: jax.Array):
     logits = model(data)
     loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
     return loss, logits
-
+"""
 @nnx.jit  # JIT-compile the function
 def train_step( model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, labels: jax.Array):
     loss_gradient = nnx.grad(loss_fun, has_aux=True)  # gradient transform!
@@ -55,6 +55,13 @@ def train_step( model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, la
     loss_gradient = nnx.grad(loss_fun, has_aux=True)  # gradient transform!
     grads, logits = loss_gradient(model, data, labels)
     optimizer.update(grads)  # inplace update
+"""
+@nnx.jit
+def train_step(model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, labels: jax.Array):
+    loss_gradient = nnx.grad(loss_fun, has_aux=True)
+    grads, logits = loss_gradient(model, data, labels)
+    optimizer.update(model, grads)
+
 
 def jax_train_test_split(features, labels, test_fraction=0.25, seed=0):
     features = jnp.asarray(features)
