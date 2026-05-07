@@ -101,8 +101,8 @@ class CNN(nnx.Module):
     def __call__(self, x):
         x = nnx.relu6(self.layer0(x))
         x = nnx.relu6(self.layer1(x))
-        x = nnx.relu6(self.layer2(x))
-        x = nnx.relu6(self.layer3(x))
+        #x = nnx.relu6(self.layer2(x))
+        #x = nnx.relu6(self.layer3(x))
         x = x.reshape((x.shape[0], -1))  # flatten
         x = nnx.relu6(self.layer4(x))
         x = nnx.relu6(self.layer5(x))
