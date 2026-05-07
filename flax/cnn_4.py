@@ -90,19 +90,20 @@ def jax_train_test_split(features, labels, test_fraction=0.25, seed=0):
 class CNN(nnx.Module):
     def __init__(self,  l: int = 300, h: int = 64, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
         self.layer0 = nnx.Conv(in_features=1, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer1 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer2 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        #self.layer1 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        #self.layer2 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer3 = nnx.Conv(in_features=8, out_features=1, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer4 = nnx.Linear((l - 4*4) * (h - 4*4), n_hidden, rngs=rngs)
+        #self.layer4 = nnx.Linear((l - 4*4) * (h - 4*4), n_hidden, rngs=rngs)
+        self.layer4 = nnx.Linear((l - 2*4) * (h - 2*4), n_hidden, rngs=rngs)
         self.layer5 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.layer6 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.output = nnx.Linear(n_hidden, n_targets, rngs=rngs)
 
     def __call__(self, x):
         x = nnx.relu6(self.layer0(x))
-        x = nnx.relu6(self.layer1(x))
+        #x = nnx.relu6(self.layer1(x))
         #x = nnx.relu6(self.layer2(x))
-        #x = nnx.relu6(self.layer3(x))
+        x = nnx.relu6(self.layer3(x))
         x = x.reshape((x.shape[0], -1))  # flatten
         x = nnx.relu6(self.layer4(x))
         x = nnx.relu6(self.layer5(x))
