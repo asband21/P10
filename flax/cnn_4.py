@@ -14,7 +14,11 @@ def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed:
         rows = [line.strip().split("\t") for line in f]
     images = []
     labels  = []
+    num = 0
     for i in rows:
+        num = num +1
+        if num > 100:
+            break
         sr, x = wavfile.read("../data_set/" + i[3])
         x = x.astype("float32")
         x = x / 32768.0
@@ -43,19 +47,7 @@ def loss_fun(model: nnx.Module, data: jax.Array, labels: jax.Array):
     logits = model(data)
     loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
     return loss, logits
-"""
-@nnx.jit  # JIT-compile the function
-def train_step( model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, labels: jax.Array):
-    loss_gradient = nnx.grad(loss_fun, has_aux=True)  # gradient transform!
-    grads, logits = loss_gradient(model, data, labels)
-    optimizer.update(grads)  # inplace update
 
-@nnx.jit  # JIT-compile the function
-def train_step( model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, labels: jax.Array):
-    loss_gradient = nnx.grad(loss_fun, has_aux=True)  # gradient transform!
-    grads, logits = loss_gradient(model, data, labels)
-    optimizer.update(grads)  # inplace update
-"""
 @nnx.jit
 def train_step(model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, labels: jax.Array):
     loss_gradient = nnx.grad(loss_fun, has_aux=True)
@@ -90,19 +82,19 @@ def jax_train_test_split(features, labels, test_fraction=0.25, seed=0):
 class CNN(nnx.Module):
     def __init__(self,  l: int = 300, h: int = 64, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
         self.layer0 = nnx.Conv(in_features=1, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        #self.layer1 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        #self.layer2 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        self.layer1 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
+        self.layer2 = nnx.Conv(in_features=8, out_features=8, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer3 = nnx.Conv(in_features=8, out_features=1, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        #self.layer4 = nnx.Linear((l - 4*4) * (h - 4*4), n_hidden, rngs=rngs)
-        self.layer4 = nnx.Linear((l - 2*4) * (h - 2*4), n_hidden, rngs=rngs)
+        self.layer4 = nnx.Linear((l - 4*4) * (h - 4*4), n_hidden, rngs=rngs)
+        #self.layer4 = nnx.Linear((l - 2*4) * (h - 2*4), n_hidden, rngs=rngs)
         self.layer5 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.layer6 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.output = nnx.Linear(n_hidden, n_targets, rngs=rngs)
 
     def __call__(self, x):
         x = nnx.relu6(self.layer0(x))
-        #x = nnx.relu6(self.layer1(x))
-        #x = nnx.relu6(self.layer2(x))
+        x = nnx.relu6(self.layer1(x))
+        x = nnx.relu6(self.layer2(x))
         x = nnx.relu6(self.layer3(x))
         x = x.reshape((x.shape[0], -1))  # flatten
         x = nnx.relu6(self.layer4(x))
