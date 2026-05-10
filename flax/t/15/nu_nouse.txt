@@ -1,0 +1,360 @@
+(.venv) klyx@8j:~/git/p10/dataset_gammel_gruppe/flax$ python cnn_4.py 
+/home/klyx/git/p10/dataset_gammel_gruppe/.venv/lib/python3.12/site-packages/jax/_src/numpy/array_constructors.py:312: ComplexWarning: Casting complex values to real discards the imaginary part
+  out_array: Array = lax._convert_element_type(
+(100, 300, 64, 1)
+(300, 64, 1)
+(10, 300, 64, 1)
+CNN( # Param: 3,617,256 (14.5 MB)
+  layer0=Conv( # Param: 208 (832 B)
+    kernel_shape=(5, 5, 1, 8),
+    kernel=Param( # 200 (800 B)
+      value=Array(shape=(5, 5, 1, 8), dtype=dtype('float32'))
+    ),
+    bias=Param( # 8 (32 B)
+      value=Array(shape=(8,), dtype=dtype('float32'))
+    ),
+    in_features=1,
+    out_features=8,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    conv_general_dilated=<function conv_general_dilated at 0x7d735c5e2520>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  layer1=Conv( # Param: 1,608 (6.4 KB)
+    kernel_shape=(5, 5, 8, 8),
+    kernel=Param( # 1,600 (6.4 KB)
+      value=Array(shape=(5, 5, 8, 8), dtype=dtype('float32'))
+    ),
+    bias=Param( # 8 (32 B)
+      value=Array(shape=(8,), dtype=dtype('float32'))
+    ),
+    in_features=8,
+    out_features=8,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    conv_general_dilated=<function conv_general_dilated at 0x7d735c5e2520>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  layer2=Conv( # Param: 1,608 (6.4 KB)
+    kernel_shape=(5, 5, 8, 8),
+    kernel=Param( # 1,600 (6.4 KB)
+      value=Array(shape=(5, 5, 8, 8), dtype=dtype('float32'))
+    ),
+    bias=Param( # 8 (32 B)
+      value=Array(shape=(8,), dtype=dtype('float32'))
+    ),
+    in_features=8,
+    out_features=8,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    conv_general_dilated=<function conv_general_dilated at 0x7d735c5e2520>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  layer3=Conv( # Param: 201 (804 B)
+    kernel_shape=(5, 5, 8, 1),
+    kernel=Param( # 200 (800 B)
+      value=Array(shape=(5, 5, 8, 1), dtype=dtype('float32'))
+    ),
+    bias=Param( # 1 (4 B)
+      value=Array([0.], dtype=float32)
+    ),
+    in_features=8,
+    out_features=1,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    conv_general_dilated=<function conv_general_dilated at 0x7d735c5e2520>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  layer4=Linear( # Param: 3,476,415 (13.9 MB)
+    kernel=Param( # 3,476,160 (13.9 MB)
+      value=Array(shape=(13632, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=13632,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    dot_general=<function dot_general at 0x7d735c58d260>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  layer5=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    dot_general=<function dot_general at 0x7d735c58d260>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  layer6=Linear( # Param: 65,280 (261.1 KB)
+    kernel=Param( # 65,025 (260.1 KB)
+      value=Array(shape=(255, 255), dtype=dtype('float32'))
+    ),
+    bias=Param( # 255 (1.0 KB)
+      value=Array(shape=(255,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=255,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    dot_general=<function dot_general at 0x7d735c58d260>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  ),
+  output=Linear( # Param: 6,656 (26.6 KB)
+    kernel=Param( # 6,630 (26.5 KB)
+      value=Array(shape=(255, 26), dtype=dtype('float32'))
+    ),
+    bias=Param( # 26 (104 B)
+      value=Array(shape=(26,), dtype=dtype('float32'))
+    ),
+    in_features=255,
+    out_features=26,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    dot_general=<function dot_general at 0x7d735c58d260>,
+    promote_dtype=<function promote_dtype at 0x7d735b180180>,
+    preferred_element_type=None
+  )
+)
+[[0.5309632  0.57593566 0.48006684 0.4834849  0.51659524 0.47280744
+  0.5660926  0.49571523 0.511329   0.5448317  0.54711264 0.5503355
+  0.5429853  0.5291108  0.46543708 0.5116235  0.5094014  0.55323315
+  0.5065502  0.55621684 0.5004803  0.47957084 0.5504985  0.52441865
+  0.5025483  0.48917273]]
+epoch 0: loss=3.22
+epoch 4: loss=2.83
+epoch 8: loss=2.74
+epoch 12: loss=2.67
+epoch 16: loss=2.62
+epoch 20: loss=2.57
+epoch 24: loss=2.53
+epoch 28: loss=2.49
+epoch 32: loss=2.44
+epoch 36: loss=2.41
+epoch 40: loss=2.39
+epoch 44: loss=2.38
+epoch 48: loss=2.37
+epoch 52: loss=2.36
+epoch 56: loss=2.36
+epoch 60: loss=2.35
+epoch 64: loss=2.35
+epoch 68: loss=2.35
+epoch 72: loss=2.35
+epoch 76: loss=2.34
+epoch 80: loss=2.34
+epoch 84: loss=2.34
+epoch 88: loss=2.34
+epoch 92: loss=2.34
+epoch 96: loss=2.34
+epoch 100: loss=2.34
+epoch 104: loss=2.34
+epoch 108: loss=2.34
+epoch 112: loss=2.34
+epoch 116: loss=2.34
+epoch 120: loss=2.34
+epoch 124: loss=2.34
+epoch 128: loss=2.33
+epoch 132: loss=2.33
+epoch 136: loss=2.33
+epoch 140: loss=2.33
+epoch 144: loss=2.33
+epoch 148: loss=2.33
+epoch 152: loss=2.33
+epoch 156: loss=2.33
+epoch 160: loss=2.33
+epoch 164: loss=2.33
+epoch 168: loss=2.33
+epoch 172: loss=2.33
+epoch 176: loss=2.33
+epoch 180: loss=2.33
+epoch 184: loss=2.33
+epoch 188: loss=2.33
+epoch 192: loss=2.33
+epoch 196: loss=2.33
+epoch 200: loss=2.33
+epoch 204: loss=2.33
+epoch 208: loss=2.33
+epoch 212: loss=2.33
+epoch 216: loss=2.33
+epoch 220: loss=2.33
+epoch 224: loss=2.33
+epoch 228: loss=2.33
+epoch 232: loss=2.33
+epoch 236: loss=2.33
+epoch 240: loss=2.33
+epoch 244: loss=2.33
+epoch 248: loss=2.33
+epoch 252: loss=2.33
+epoch 256: loss=2.33
+epoch 260: loss=2.33
+epoch 264: loss=2.33
+epoch 268: loss=2.33
+epoch 272: loss=2.33
+epoch 276: loss=2.33
+epoch 280: loss=2.33
+epoch 284: loss=2.33
+epoch 288: loss=2.33
+epoch 292: loss=2.33
+epoch 296: loss=2.33
+epoch 300: loss=2.33
+epoch 304: loss=2.33
+epoch 308: loss=2.33
+epoch 312: loss=2.33
+epoch 316: loss=2.33
+epoch 320: loss=2.33
+epoch 324: loss=2.33
+epoch 328: loss=2.33
+epoch 332: loss=2.33
+epoch 336: loss=2.33
+epoch 340: loss=2.33
+epoch 344: loss=2.33
+epoch 348: loss=2.33
+10 labels match out of 10: accuracy = 100.000000%
+Saved checkpoint to: /home/klyx/git/p10/dataset_gammel_gruppe/flax/model_cnn/1778184916
+	0.01
+3.224239
+2.8251216
+2.7409303
+2.669241
+2.616557
+2.5715969
+2.529862
+2.4923675
+2.443544
+2.4085002
+2.3884456
+2.3761415
+2.3676693
+2.361495
+2.3567686
+2.3531117
+2.3502252
+2.3478942
+2.3459587
+2.3443546
+2.3430068
+2.3418596
+2.3408582
+2.3400064
+2.3392563
+2.3385513
+2.3379042
+2.3372886
+2.3367429
+2.3362596
+2.3358023
+2.3353856
+2.3349955
+2.3346555
+2.3343356
+2.3340137
+2.3337593
+2.3334837
+2.3332214
+2.332979
+2.3327196
+2.332507
+2.3322992
+2.3320956
+2.331893
+2.3316905
+2.331506
+2.3313386
+2.3311384
+2.3309896
+2.3308113
+2.3306704
+2.3305173
+2.3303678
+2.3302312
+2.3300886
+2.3299906
+2.329854
+2.3297386
+2.3296306
+2.329507
+2.3294165
+2.329273
+2.3291683
+2.3290575
+2.3289666
+2.3288736
+2.3287551
+2.3286757
+2.328574
+2.3284776
+2.3283794
+2.3283024
+2.3282125
+2.3281305
+2.3280416
+2.3279796
+2.3279216
+2.3278308
+2.327755
+2.3276823
+2.3276012
+2.327529
+2.3274624
+2.327413
+2.327334
+2.3272781
+2.327216

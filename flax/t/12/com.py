@@ -40,7 +40,7 @@ for ln, noise_dict in sorted(data.items()):
         writer.writerow(header)
 
         for i in range(max_len):
-            row = [(i + 1)*20]
+            row = [i*2]
 
             for noise in noises:
                 values = noise_dict[noise]

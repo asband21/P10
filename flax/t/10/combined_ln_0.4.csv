@@ -1,9 +1,9 @@
 instance,noise_0.01,noise_0.015,noise_0.02,noise_0.025,noise_0.03,noise_0.035
-1,4.279641,4.27161,4.2946515,4.297486,4.281269,4.276727
-2,nan,nan,nan,nan,nan,nan
-3,nan,nan,nan,nan,nan,nan
-4,nan,nan,nan,nan,nan,nan
-5,nan,nan,nan,nan,nan,nan
-6,nan,nan,nan,nan,nan,nan
-7,nan,nan,nan,nan,nan,nan
-8,nan,nan,nan,nan,nan,nan
+20,4.279641,4.27161,4.2946515,4.297486,4.281269,4.276727
+40,nan,nan,nan,nan,nan,nan
+60,nan,nan,nan,nan,nan,nan
+80,nan,nan,nan,nan,nan,nan
+100,nan,nan,nan,nan,nan,nan
+120,nan,nan,nan,nan,nan,nan
+140,nan,nan,nan,nan,nan,nan
+160,nan,nan,nan,nan,nan,nan

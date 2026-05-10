@@ -1,0 +1,233 @@
+==> t/6/output_chunk_1024.txt <==
+
+epoch	0	loss	4.57
+epoch	4	loss	6.50
+epoch	8	loss	5.89
+epoch	12	loss	4.76
+epoch	16	loss	4.34
+epoch	20	loss	3.49
+epoch	24	loss	3.65
+epoch	28	loss	3.84
+epoch	32	loss	3.77
+epoch	36	loss	3.85
+epoch	40	loss	3.88
+epoch	44	loss	3.41
+epoch	48	loss	3.46
+epoch	52	loss	3.49
+epoch	56	loss	3.51
+epoch	60	loss	3.52
+epoch	64	loss	3.54
+epoch	68	loss	3.55
+epoch	72	loss	3.56
+epoch	76	loss	3.57
+epoch	80	loss	3.58
+epoch	84	loss	3.59
+epoch	88	loss	3.60
+epoch	92	loss	3.61
+epoch	96	loss	3.62
+48 labels match out of 251	accuracy = 19.123507%
+
+==> t/6/output_chunk_126_2.txt <==
+
+epoch	0	loss	3.68
+epoch	4	loss	3.49
+epoch	8	loss	3.42
+epoch	12	loss	3.38
+epoch	16	loss	3.39
+epoch	20	loss	3.39
+epoch	24	loss	3.40
+epoch	28	loss	3.41
+epoch	32	loss	3.41
+epoch	36	loss	3.42
+epoch	40	loss	3.43
+epoch	44	loss	3.44
+epoch	48	loss	3.45
+epoch	52	loss	3.45
+epoch	56	loss	3.46
+epoch	60	loss	3.47
+epoch	64	loss	3.47
+epoch	68	loss	3.48
+epoch	72	loss	3.49
+epoch	76	loss	3.49
+epoch	80	loss	3.50
+epoch	84	loss	3.50
+epoch	88	loss	3.51
+epoch	92	loss	3.52
+epoch	96	loss	3.52
+44 labels match out of 251	accuracy = 17.529881%
+
+==> t/6/output_chunk_126.txt <==
+
+epoch	0	loss	3.68
+epoch	4	loss	3.49
+epoch	8	loss	3.42
+epoch	12	loss	3.38
+epoch	16	loss	3.39
+epoch	20	loss	3.39
+epoch	24	loss	3.40
+epoch	28	loss	3.41
+epoch	32	loss	3.41
+epoch	36	loss	3.42
+epoch	40	loss	3.43
+epoch	44	loss	3.44
+epoch	48	loss	3.45
+epoch	52	loss	3.45
+epoch	56	loss	3.46
+epoch	60	loss	3.47
+epoch	64	loss	3.47
+epoch	68	loss	3.48
+epoch	72	loss	3.49
+epoch	76	loss	3.49
+epoch	80	loss	3.50
+epoch	84	loss	3.50
+epoch	88	loss	3.51
+epoch	92	loss	3.52
+epoch	96	loss	3.52
+44 labels match out of 251	accuracy = 17.529881%
+
+==> t/6/output_chunk_256.txt <==
+
+epoch	0	loss	3.77
+epoch	4	loss	3.58
+epoch	8	loss	3.74
+epoch	12	loss	3.61
+epoch	16	loss	3.43
+epoch	20	loss	3.43
+epoch	24	loss	3.44
+epoch	28	loss	3.45
+epoch	32	loss	3.45
+epoch	36	loss	3.46
+epoch	40	loss	3.47
+epoch	44	loss	3.47
+epoch	48	loss	3.48
+epoch	52	loss	3.48
+epoch	56	loss	3.49
+epoch	60	loss	3.49
+epoch	64	loss	3.50
+epoch	68	loss	3.51
+epoch	72	loss	3.51
+epoch	76	loss	3.52
+epoch	80	loss	3.52
+epoch	84	loss	3.52
+epoch	88	loss	3.53
+epoch	92	loss	3.53
+epoch	96	loss	3.54
+42 labels match out of 251	accuracy = 16.733068%
+
+==> t/6/output_chunk_32.txt <==
+
+epoch	0	loss	3.63
+epoch	4	loss	3.56
+epoch	8	loss	3.61
+epoch	12	loss	3.57
+epoch	16	loss	3.58
+epoch	20	loss	3.61
+epoch	24	loss	3.64
+epoch	28	loss	3.66
+epoch	32	loss	3.69
+epoch	36	loss	3.71
+epoch	40	loss	3.74
+epoch	44	loss	3.76
+epoch	48	loss	3.78
+epoch	52	loss	3.80
+epoch	56	loss	3.82
+epoch	60	loss	3.83
+epoch	64	loss	3.85
+epoch	68	loss	3.87
+epoch	72	loss	3.88
+epoch	76	loss	3.89
+epoch	80	loss	3.91
+epoch	84	loss	3.92
+epoch	88	loss	3.93
+epoch	92	loss	3.94
+epoch	96	loss	3.95
+36 labels match out of 251	accuracy = 14.342630%
+
+==> t/6/output_chunk_512.txt <==
+
+epoch	0	loss	4.06
+epoch	4	loss	3.78
+epoch	8	loss	3.83
+epoch	12	loss	4.12
+epoch	16	loss	3.68
+epoch	20	loss	3.53
+epoch	24	loss	3.54
+epoch	28	loss	3.55
+epoch	32	loss	3.56
+epoch	36	loss	3.57
+epoch	40	loss	3.58
+epoch	44	loss	3.59
+epoch	48	loss	3.60
+epoch	52	loss	3.60
+epoch	56	loss	3.61
+epoch	60	loss	3.61
+epoch	64	loss	3.62
+epoch	68	loss	3.63
+epoch	72	loss	3.63
+epoch	76	loss	3.64
+epoch	80	loss	3.64
+epoch	84	loss	3.65
+epoch	88	loss	3.65
+epoch	92	loss	3.66
+epoch	96	loss	3.66
+39 labels match out of 251	accuracy = 15.537849%
+
+==> t/6/output_chunk_64.txt <==
+
+epoch	0	loss	3.47
+epoch	4	loss	3.41
+epoch	8	loss	3.33
+epoch	12	loss	3.33
+epoch	16	loss	3.35
+epoch	20	loss	3.37
+epoch	24	loss	3.39
+epoch	28	loss	3.41
+epoch	32	loss	3.42
+epoch	36	loss	3.44
+epoch	40	loss	3.45
+epoch	44	loss	3.47
+epoch	48	loss	3.48
+epoch	52	loss	3.49
+epoch	56	loss	3.50
+epoch	60	loss	3.51
+epoch	64	loss	3.52
+epoch	68	loss	3.53
+epoch	72	loss	3.54
+epoch	76	loss	3.55
+epoch	80	loss	3.56
+epoch	84	loss	3.56
+epoch	88	loss	3.57
+epoch	92	loss	3.58
+epoch	96	loss	3.59
+42 labels match out of 251	accuracy = 16.733068%
+
+==> t/6/output_chunk_768.txt <==
+
+epoch	0	loss	4.41
+epoch	4	loss	4.39
+epoch	8	loss	4.48
+epoch	12	loss	4.01
+epoch	16	loss	3.57
+epoch	20	loss	3.86
+epoch	24	loss	3.45
+epoch	28	loss	3.47
+epoch	32	loss	3.49
+epoch	36	loss	3.50
+epoch	40	loss	3.51
+epoch	44	loss	3.52
+epoch	48	loss	3.53
+epoch	52	loss	3.54
+epoch	56	loss	3.55
+epoch	60	loss	3.56
+epoch	64	loss	3.56
+epoch	68	loss	3.57
+epoch	72	loss	3.57
+epoch	76	loss	3.58
+epoch	80	loss	3.59
+epoch	84	loss	3.59
+epoch	88	loss	3.60
+epoch	92	loss	3.60
+epoch	96	loss	3.61
+42 labels match out of 251	accuracy = 16.733068%
+
+

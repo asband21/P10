@@ -51,7 +51,6 @@ epoch 192: loss=3.61
 epoch 196: loss=3.62
 
 4
-2026-05-06 11:57:57.208984: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
 epoch 0: loss=3.74
 epoch 4: loss=3.62
 epoch 8: loss=3.55
@@ -102,11 +101,9 @@ epoch 184: loss=3.83
 epoch 188: loss=3.83
 epoch 192: loss=3.84
 epoch 196: loss=3.84
-36 labels match out of 251: accuracy = 14.342630%
-Saved checkpoint to: /home/klyx/git/p10/P10/flax/model_fft/1778061465
 
 5
-2026-05-06 12:00:40.133470: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+
 epoch 0: loss=3.78
 epoch 4: loss=3.71
 epoch 8: loss=3.69
@@ -157,11 +154,9 @@ epoch 184: loss=3.82
 epoch 188: loss=3.82
 epoch 192: loss=3.82
 epoch 196: loss=3.83
-43 labels match out of 251: accuracy = 17.131475%
-Saved checkpoint to: /home/klyx/git/p10/P10/flax/model_fft/1778061632
 
 6
-2026-05-06 12:02:13.398508: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+
 epoch 0: loss=3.83
 epoch 4: loss=3.74
 epoch 8: loss=3.60
@@ -212,8 +207,6 @@ epoch 184: loss=3.87
 epoch 188: loss=3.87
 epoch 192: loss=3.87
 epoch 196: loss=3.88
-35 labels match out of 251: accuracy = 13.944224%
-Saved checkpoint to: /home/klyx/git/p10/P10/flax/model_fft/1778061727
 
 7
 epoch 0: loss=3.86
@@ -266,6 +259,4 @@ epoch 184: loss=4.04
 epoch 188: loss=4.04
 epoch 192: loss=4.05
 epoch 196: loss=4.05
-33 labels match out of 251: accuracy = 13.147411%
-Saved checkpoint to: /home/klyx/git/p10/P10/flax/model_fft/1778061865
 
