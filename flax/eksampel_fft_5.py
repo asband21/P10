@@ -91,8 +91,8 @@ class SimpleNN(nnx.Module):
 
     def __call__(self, x):
         #x = x.reshape(x.shape[0], self.n_features) # Flatten images.
-        x = nnx.relu6(self.layer0(x))
         #x = nnx.selu(self.layer00(x))
+        x = nnx.relu6(self.layer0(x))
         x = nnx.relu6(self.layer1(x))
         x = nnx.relu6(self.layer2(x))
         x = nnx.relu6(self.layer3(x))
