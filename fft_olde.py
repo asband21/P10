@@ -9,6 +9,7 @@ from pathlib import Path
 from scipy.io import wavfile
 import orbax.checkpoint as ocp
 
+jax.config.update('jax_platform_name', 'cpu')
 
 def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed: int = 5212):
     with open("archive_1_data.csv", "r") as f:
@@ -19,9 +20,9 @@ def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed:
     distens = [] 
     num = 0 
     for i in rows:
-        if num > 40:
-            break
-        num = num + 1
+        #if num > 40:
+        #    break
+        #num = num + 1
 
         sr, x = wavfile.read(i[2])
         x = x.astype("float32")
@@ -50,7 +51,7 @@ def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed:
     print(jnp.shape(distens))
     #print(jnp.shape(images[0]))
     labels = jnp.asarray(labels, dtype=jnp.float32)
-    distens = jnp.asarray(labels, dtype=jnp.float32)
+    distens = jnp.asarray(distens, dtype=jnp.float32)
     unique_labels, mapped_labels = jnp.unique(labels, return_inverse=True)
     images_train, label_train, images_test, label_test = jax_train_test_split(images, distens, test_fraction=split, seed=seed)
     return images_train, label_train, images_test, label_test, mapped_labels, n_chunks
@@ -71,8 +72,8 @@ def loss_fun(model: nnx.Module, data: jax.Array, labels: jax.Array):
 def train_step( model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, labels: jax.Array):
     loss_gradient = nnx.grad(loss_fun, has_aux=True)  # gradient transform!
     grads, logits = loss_gradient(model, data, labels)
-    optimizer.update(model, grads)
-    #optimizer.update(grads)  # inplace update
+    #optimizer.update(model, grads)
+    optimizer.update(grads)  # inplace update
 
 def jax_train_test_split(features, labels, test_fraction=0.25, seed=0):
     features = jnp.asarray(features)
@@ -131,7 +132,6 @@ l_r=0.01
 
 images_train, label_train, images_test, label_test, mapped_labels, n_chunks = lode_data(spl_amt=0)
 
-#model = SimpleNN(n_features = n_chunks * (chunk_size // 2 + 1), rngs=nnx.Rngs(0))
 audio_chanel = 2
 fit = audio_chanel*n_chunks * (chunk_size // 2 + 1)
 sha = jnp.shape(label_train) 
@@ -149,33 +149,22 @@ optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=l_r), wrt=nnx.Param, )
 key = jax.random.key(int(time.time()))
 
 loserade = []
-for i in range(350):  # 300 training epochs
+for i in range(2000):  # 300 training epochs
     key, k = jax.random.split(key)
     noisy_images_train = images_train + jax.random.normal(k, shape=images_train.shape, dtype=images_train.dtype) * noise
-    train_step(model, optimizer, images_train , label_train)
-    if i % 4 == 0:  # Print metrics.
+    train_step(model, optimizer, noisy_images_train, label_train)
+    if i % 6 == 0:  # Print metrics.
         loss, _ = loss_fun(model, images_test, label_test)
         loserade.append(loss)
-        print(f"epoch {i}: loss={loss:.2f}")
+        print(f"epoch\t{i}\tloss\t{loss}")
 
-label_pred = model(images_test).argmax(axis=1)
-num_matches = jnp.count_nonzero(label_pred == label_test)
-num_total = len(label_test)
-accuracy = num_matches / num_total
-print(f"{num_matches} labels match out of {num_total}:"
-      f" accuracy = {num_matches/num_total:%}")
-
-
-#_, state = nnx.split(model)
-#run_dir.mkdir(parents=True, exist_ok=False)
-#checkpointer.save(run_dir / "state", state)
-#checkpointer.wait_until_finished()
+_, state = nnx.split(model)
+run_dir.mkdir(parents=True, exist_ok=True)
+checkpointer.save(run_dir / "state", state)
+checkpointer.wait_until_finished()
 
 print(f"Saved checkpoint to: {run_dir}")
 
-#checkpointer.save(ckpt_dir / 'state', state)
-#checkpointer.wait_until_finished()
 print(f"\t{l_r}")
 for i in loserade:
     print(i)
-
