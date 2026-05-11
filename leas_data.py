@@ -70,9 +70,9 @@ sr, x = wavfile.read(sound_path)
 #lode audio
 x = x.astype("float32")
 x = x / 32768.0
-spl_amt = 3
+#spl_amt = 3
 chunk_size = 126
-x = x[:len(x) // spl_amt]
+#x = x[:len(x) // spl_amt]
 n_chunks = len(x) // chunk_size
 x = x[:n_chunks * chunk_size]
 x_spl_0 = jnp.array(x[:,0]).reshape(n_chunks, chunk_size)
@@ -91,25 +91,20 @@ model = SimpleNN(n_features = n_f, n_targets = n_t , rngs=nnx.Rngs(0))
 _, state = nnx.split(model)
 
 checkpointer = ocp.StandardCheckpointer()
-checkpoint_path = Path("model_fft/1778496791/state")
+checkpoint_path = Path("model_fft/1778496791/state").resolve()
 state = checkpointer.restore(checkpoint_path, state)
 nnx.update(model, state)
 
 ## model pridiksin
-model_data = model(x_fft)
+data = model(x_fft)
+print(data)
+print(jnp.shape(data))
+model_data = jnp.array([angle["LiDAR_angle"], data]).T
+print(model_data)
 
 ## Transform data
 cartesian_data = to_cartesian(polar_data)
 cartesian_model_data = to_cartesian(model_data)
-
-## Gradients
-#grad_to_cartesian = jax.jacobian(to_cartesian)
-#grad_to_cartesian_scalar = jax.grad(to_cartesian_scalar)
-
-#g = grad_to_cartesian_scalar(1.0, 1.0)
-#grad_data = grad_to_cartesian(polar_data)
-
-#sys.exit(1)
 
 ## Plot data
 x_vals = jnp.array(cartesian_data[:, 0])
