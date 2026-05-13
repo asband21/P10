@@ -22,8 +22,9 @@ def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed:
         x = x[:n_chunks * chunk_size]
         x_spl = jnp.array(x).reshape(n_chunks, chunk_size)
 
-        x_fft = jnp.fft.rfft(x_spl, axis=-1)
-        x_fft = x_fft.flatten()
+        #x_fft = jnp.fft.rfft(x_spl, axis=-1)
+        x_fft = jnp.log1p(jnp.abs(jnp.fft.rfft(x_spl, axis=-1))).flatten()
+        #x_fft = x_fft.flatten()
         images.append(x_fft)
         labels.append(int(i[0]))
 

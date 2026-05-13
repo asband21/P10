@@ -9,7 +9,7 @@ from pathlib import Path
 from scipy.io import wavfile
 import orbax.checkpoint as ocp
 
-jax.config.update('jax_platform_name', 'cpu')
+#jax.config.update('jax_platform_name', 'cpu')
 
 def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed: int = 5212):
     with open("archive_1_data.csv", "r") as f:
@@ -20,6 +20,9 @@ def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed:
     distens = [] 
     num = 0 
     for i in rows:
+        if 500 < num:
+            break
+
         sr, x = wavfile.read(i[2])
         x = x.astype("float32")
         x = x / 32768.0
@@ -117,13 +120,13 @@ class SimpleNN(nnx.Module):
         #x = self.layer3(x)
         return x
 
-chunk_size = 126
+chunk_size = 64
 noise = 0.01
 l_r=0.01
 
 images_train, label_train, images_test, label_test, mapped_labels, n_chunks = lode_data(spl_amt=0)
 
-audio_chanel = 2
+audio_chanel = 1
 fit = audio_chanel*n_chunks * (chunk_size // 2 + 1)
 sha = jnp.shape(label_train) 
 model = SimpleNN(n_features = fit, n_targets = sha[1] , n_hidden = 1024, rngs=nnx.Rngs(0))
@@ -140,14 +143,33 @@ optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=l_r), wrt=nnx.Param, )
 #key = jax.random.key(int(time.time()))
 
 loserade = []
-for i in range(300):  # 300 training epochs
+#for i in range(300):  # 300 training epochs
     #key, k = jax.random.split(key)
     #noisy_images_train = images_train + jax.random.normal(k, shape=images_train.shape, dtype=images_train.dtype) * noise
-    train_step(model, optimizer, images_train , label_train)
-    if i % 5 == 0:  # Print metrics.
+#    train_step(model, optimizer, images_train , label_train)
+#    if i % 5 == 0:  # Print metrics.
+#        loss, _ = loss_fun(model, images_test, label_test)
+#        loserade.append(loss)
+#        print(f"epoch\t{i}\tloss\t{loss}")
+
+batch_size = 8
+
+for epoch in range(80):
+    for start in range(0, images_train.shape[0], batch_size):
+        end = start + batch_size
+        print(start)
+        x_batch = images_train[start:end]
+        y_batch = label_train[start:end]
+
+        train_step(model, optimizer, x_batch, y_batch)
+        #train_step(model, optimizer, images_train , label_train)
+
+    if epoch % 2 == 0:
         loss, _ = loss_fun(model, images_test, label_test)
-        loserade.append(loss)
-        print(f"epoch\t{i}\tloss\t{loss}")
+        loss_value = float(loss)
+        loserade.append(loss_value)
+        print(f"epoch\t{epoch}\tloss\t{loss_value}")
+
 
 _, state = nnx.split(model)
 run_dir.mkdir(parents=True, exist_ok=True)

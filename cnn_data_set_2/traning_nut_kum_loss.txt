@@ -1,0 +1,680 @@
+In the following, we have a bit of additional training data, where you can see that the loss rate is going down. One of the other things you can see is that we only used random samples for the displayed loss. This will be rectified and tested. In the file, you can see where the model is saved. The next test will utilise a complete loss calculation and then check whether it should make a complete run.
+
+
+klyx@8D:~/git/p10/P10/cnn_data_set_2$ python fft_olde_traning_bash_2.py 
+['42', '330', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__330_l.wav']
+['24', '75', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__75_h.wav']
+['24', '725', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__725_l.wav']
+['30', '769', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__769_h.wav']
+['30', '669', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__669_h.wav']
+['51', '194', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_51cm__194_h.wav']
+['36', '300', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__300_l.wav']
+['36', '383', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__383_l.wav']
+['36', '484', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__484_l.wav']
+['51', '32', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_51cm__32_l.wav']
+['48', '33', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__33_l.wav']
+['24', '79', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__79_h.wav']
+['45', '217', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__217_l.wav']
+['39', '146', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__146_h.wav']
+['24', '36', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__36_h.wav']
+['30', '582', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__582_l.wav']
+['30', '60', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__60_l.wav']
+['36', '226', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__226_h.wav']
+['5', '633', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__633_l.wav']
+['30', '123', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__123_l.wav']
+['12', '66', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__66_l.wav']
+['21', '471', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__471_l.wav']
+['48', '329', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__329_l.wav']
+['30', '999', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__999_h.wav']
+['36', '278', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__278_l.wav']
+['21', '213', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__213_l.wav']
+['12', '478', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__478_h.wav']
+['9', '380', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__380_l.wav']
+['21', '56', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__56_h.wav']
+['36', '79', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__79_l.wav']
+['51', '199', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_51cm__199_h.wav']
+['36', '581', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__581_h.wav']
+['24', '18', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__18_l.wav']
+['30', '45', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__45_h.wav']
+['39', '262', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__262_h.wav']
+['42', '279', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__279_h.wav']
+['21', '427', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__427_l.wav']
+['9', '548', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__548_l.wav']
+['21', '106', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__106_h.wav']
+['54', '51', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_54cm__51_l.wav']
+['24', '289', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__289_h.wav']
+['39', '707', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__707_h.wav']
+['5', '0', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__0_l.wav']
+['5', '0', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__0_l.wav']
+['30', '360', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__360_h.wav']
+['18', '774', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__774_l.wav']
+['7', '21', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_7cm__21_l.wav']
+['12', '65', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__65_h.wav']
+['30', '565', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__565_h.wav']
+['18', '349', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__349_h.wav']
+['18', '832', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__832_h.wav']
+['30', '520', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__520_h.wav']
+['30', '668', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__668_l.wav']
+['36', '326', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__326_l.wav']
+['36', '332', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__332_l.wav']
+['18', '528', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__528_l.wav']
+['60', '390', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__390_l.wav']
+['48', '299', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__299_h.wav']
+['21', '70', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__70_h.wav']
+['42', '51', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__51_h.wav']
+['54', '207', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_54cm__207_h.wav']
+['60', '913', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__913_l.wav']
+['24', '332', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__332_l.wav']
+['60', '175', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__175_l.wav']
+['5', '825', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__825_l.wav']
+['60', '136', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__136_h.wav']
+['9', '204', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__204_h.wav']
+['5', '983', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__983_h.wav']
+['45', '277', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__277_l.wav']
+['36', '337', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__337_l.wav']
+['21', '96', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__96_l.wav']
+['24', '616', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__616_l.wav']
+['24', '204', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__204_h.wav']
+['60', '27', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__27_l.wav']
+['48', '566', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__566_h.wav']
+['7', '28', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_7cm__28_h.wav']
+['51', '146', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_51cm__146_l.wav']
+['18', '257', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__257_h.wav']
+['39', '557', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__557_l.wav']
+['18', '563', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__563_h.wav']
+['24', '576', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__576_l.wav']
+['39', '568', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__568_l.wav']
+['21', '247', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__247_h.wav']
+['39', '910', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__910_h.wav']
+['48', '380', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__380_l.wav']
+['12', '239', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__239_l.wav']
+['24', '437', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__437_h.wav']
+['5', '538', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__538_l.wav']
+['24', '937', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__937_l.wav']
+['9', '274', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__274_l.wav']
+['39', '850', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__850_l.wav']
+['30', '378', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__378_l.wav']
+['60', '481', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__481_h.wav']
+['7', '84', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_7cm__84_h.wav']
+['60', '617', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__617_h.wav']
+['39', '738', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__738_h.wav']
+['39', '794', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__794_h.wav']
+['51', '119', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_51cm__119_h.wav']
+['54', '145', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_54cm__145_l.wav']
+['45', '227', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__227_h.wav']
+['12', '231', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__231_l.wav']
+['51', '63', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_51cm__63_h.wav']
+['45', '480', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__480_l.wav']
+['42', '289', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__289_l.wav']
+['18', '771', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__771_l.wav']
+['36', '122', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__122_h.wav']
+['15', '164', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_15cm__164_l.wav']
+['9', '422', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__422_l.wav']
+['24', '202', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__202_l.wav']
+['42', '156', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__156_h.wav']
+['48', '500', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__500_l.wav']
+['24', '980', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__980_l.wav']
+['39', '671', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__671_h.wav']
+['5', '734', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__734_l.wav']
+['5', '615', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__615_h.wav']
+['12', '530', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__530_h.wav']
+['12', '525', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__525_h.wav']
+['5', '779', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__779_h.wav']
+['36', '632', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__632_h.wav']
+['24', '729', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__729_h.wav']
+['24', '946', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__946_l.wav']
+['54', '4', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_54cm__4_h.wav']
+['30', '898', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__898_l.wav']
+['60', '269', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__269_l.wav']
+['42', '376', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__376_l.wav']
+['42', '212', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_42cm__212_l.wav']
+['24', '734', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__734_l.wav']
+['30', '951', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__951_h.wav']
+['30', '709', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__709_h.wav']
+['39', '960', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__960_h.wav']
+['27', '5', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_27cm__5_l.wav']
+['30', '157', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__157_h.wav']
+['39', '532', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__532_h.wav']
+['30', '704', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__704_h.wav']
+['5', '652', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__652_h.wav']
+['36', '50', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__50_h.wav']
+['12', '419', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__419_l.wav']
+['39', '658', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__658_h.wav']
+['39', '586', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__586_h.wav']
+['39', '820', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__820_l.wav']
+['45', '304', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__304_l.wav']
+['5', '853', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__853_h.wav']
+['60', '643', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__643_l.wav']
+['45', '138', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__138_l.wav']
+['45', '6', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__6_h.wav']
+['36', '445', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__445_l.wav']
+['5', '152', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__152_l.wav']
+['12', '143', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__143_l.wav']
+['12', '234', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__234_l.wav']
+['21', '299', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_21cm__299_h.wav']
+['5', '568', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_5cm__568_h.wav']
+['9', '473', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__473_h.wav']
+['24', '893', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_24cm__893_l.wav']
+['18', '75', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__75_l.wav']
+['39', '758', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_39cm__758_l.wav']
+['30', '754', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_30cm__754_h.wav']
+['9', '122', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__122_h.wav']
+['9', '205', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_9cm__205_l.wav']
+['45', '515', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_45cm__515_l.wav']
+['48', '426', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_48cm__426_l.wav']
+['18', '201', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_18cm__201_h.wav']
+['36', '0', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_36cm__0_h.wav']
+['12', '0', 'l', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_12cm__0_l.wav']
+['54', '0', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_54cm__0_h.wav']
+['60', '0', 'h', 'chunk_(hw:CARD=Microphone_1,DEV=0)__rec2_60cm__0_h.wav']
+SimpleNN( # Param: 97,966,099 (391.9 MB)
+  n_features=41668,
+  layer1=Linear( # Param: 85,338,112 (341.4 MB)
+    kernel=Param( # 85,336,064 (341.3 MB)
+      value=Array(shape=(41668, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=41668,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f50d2209bd0>,
+    bias_init=<function zeros at 0x7f50d1363640>,
+    dot_general=<function dot_general at 0x7f50d1be9630>,
+    promote_dtype=<function promote_dtype at 0x7f50d2209b40>
+  ),
+  layer2=Linear( # Param: 4,196,352 (16.8 MB)
+    kernel=Param( # 4,194,304 (16.8 MB)
+      value=Array(shape=(2048, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f50d2209bd0>,
+    bias_init=<function zeros at 0x7f50d1363640>,
+    dot_general=<function dot_general at 0x7f50d1be9630>,
+    promote_dtype=<function promote_dtype at 0x7f50d2209b40>
+  ),
+  layer3=Linear( # Param: 4,196,352 (16.8 MB)
+    kernel=Param( # 4,194,304 (16.8 MB)
+      value=Array(shape=(2048, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f50d2209bd0>,
+    bias_init=<function zeros at 0x7f50d1363640>,
+    dot_general=<function dot_general at 0x7f50d1be9630>,
+    promote_dtype=<function promote_dtype at 0x7f50d2209b40>
+  ),
+  layer4=Linear( # Param: 4,196,352 (16.8 MB)
+    kernel=Param( # 4,194,304 (16.8 MB)
+      value=Array(shape=(2048, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f50d2209bd0>,
+    bias_init=<function zeros at 0x7f50d1363640>,
+    dot_general=<function dot_general at 0x7f50d1be9630>,
+    promote_dtype=<function promote_dtype at 0x7f50d2209b40>
+  ),
+  output=Linear( # Param: 38,931 (155.7 KB)
+    kernel=Param( # 38,912 (155.6 KB)
+      value=Array(shape=(2048, 19), dtype=dtype('float32'))
+    ),
+    bias=Param( # 19 (76 B)
+      value=Array(shape=(19,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=19,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f50d2209bd0>,
+    bias_init=<function zeros at 0x7f50d1363640>,
+    dot_general=<function dot_general at 0x7f50d1be9630>,
+    promote_dtype=<function promote_dtype at 0x7f50d2209b40>
+  )
+)
+[ 0.2738665   0.03489199  0.27579814 -0.2903601   0.0180914  -0.1291169
+ -0.04210951 -0.05689356 -0.09167945 -0.14017555 -0.11452214  0.06477428
+  0.09761448 -0.33235902 -0.32021564  0.22062203 -0.09792704 -0.0341855
+  0.0911961 ] = model([0.03915405 0.05053304 0.03113059 ... 0.00162201 0.00340604 0.00192261])
+2026-05-13 13:52:36.269188: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+epoch	0	loss	2.8675835132598877
+epoch	5	loss	2.6902289390563965
+epoch	10	loss	2.5689620971679688
+epoch	15	loss	2.481293201446533
+epoch	20	loss	2.404033660888672
+epoch	25	loss	2.3220629692077637
+epoch	30	loss	2.240468978881836
+epoch	35	loss	2.1643447875976562
+epoch	40	loss	2.0329489707946777
+epoch	45	loss	1.9582363367080688
+epoch	50	loss	1.8885124921798706
+epoch	55	loss	1.8015973567962646
+epoch	60	loss	1.779211163520813
+epoch	65	loss	1.7642656564712524
+epoch	70	loss	1.6540833711624146
+epoch	75	loss	1.7111194133758545
+epoch	80	loss	1.5421258211135864
+epoch	85	loss	1.567244529724121
+epoch	90	loss	1.5175131559371948
+epoch	95	loss	1.487341046333313
+epoch	100	loss	1.4546512365341187
+epoch	105	loss	1.3661236763000488
+epoch	110	loss	1.2709492444992065
+epoch	115	loss	1.3014588356018066
+epoch	120	loss	1.3612922430038452
+epoch	125	loss	1.163069248199463
+epoch	130	loss	1.3534973859786987
+epoch	135	loss	1.1880724430084229
+epoch	140	loss	1.2366125583648682
+epoch	145	loss	1.2142375707626343
+epoch	150	loss	1.252784013748169
+epoch	155	loss	0.9899961948394775
+epoch	160	loss	1.2065106630325317
+epoch	165	loss	1.131143569946289
+epoch	170	loss	1.1118336915969849
+epoch	175	loss	1.0935330390930176
+epoch	180	loss	1.0748752355575562
+epoch	185	loss	1.1024763584136963
+epoch	190	loss	1.0838520526885986
+epoch	195	loss	1.0252974033355713
+epoch	200	loss	1.0887161493301392
+epoch	205	loss	1.0332448482513428
+epoch	210	loss	1.0636210441589355
+epoch	215	loss	1.0019975900650024
+epoch	220	loss	0.7495356798171997
+epoch	225	loss	0.9367562532424927
+epoch	230	loss	0.7226983904838562
+epoch	235	loss	0.9464606046676636
+epoch	240	loss	1.001194953918457
+epoch	245	loss	0.8840886950492859
+epoch	250	loss	0.9081157445907593
+epoch	255	loss	0.7639681100845337
+epoch	260	loss	0.6498082876205444
+epoch	265	loss	0.6388181447982788
+epoch	270	loss	0.7342814207077026
+epoch	275	loss	0.7254908084869385
+epoch	280	loss	0.8438639640808105
+epoch	285	loss	0.7090017795562744
+epoch	290	loss	0.8260669112205505
+epoch	295	loss	0.7760816216468811
+epoch	300	loss	0.9224867224693298
+epoch	305	loss	0.9185513257980347
+epoch	310	loss	0.7937729954719543
+epoch	315	loss	0.7866723537445068
+epoch	320	loss	0.5365679860115051
+epoch	325	loss	0.529312252998352
+epoch	330	loss	0.7201318740844727
+epoch	335	loss	0.515032947063446
+epoch	340	loss	0.7064180374145508
+epoch	345	loss	0.5016741156578064
+epoch	350	loss	0.6341515779495239
+epoch	355	loss	0.6299598217010498
+epoch	360	loss	0.8908131718635559
+epoch	365	loss	0.6221696138381958
+epoch	370	loss	0.4729171693325043
+epoch	375	loss	0.4677087068557739
+epoch	380	loss	0.886936604976654
+epoch	385	loss	0.45749205350875854
+epoch	390	loss	0.711857259273529
+epoch	395	loss	0.6040643453598022
+epoch	400	loss	0.6385897397994995
+epoch	405	loss	0.5992915630340576
+epoch	410	loss	0.5974764823913574
+epoch	415	loss	0.6984620094299316
+epoch	420	loss	0.5941780805587769
+epoch	425	loss	0.8873617649078369
+epoch	430	loss	0.5913070440292358
+epoch	435	loss	0.6918373107910156
+epoch	440	loss	0.6909098029136658
+epoch	445	loss	0.6902281641960144
+epoch	450	loss	0.892609715461731
+epoch	455	loss	0.8936808109283447
+epoch	460	loss	0.8954492211341858
+epoch	465	loss	0.6897635459899902
+epoch	470	loss	0.8989977836608887
+epoch	475	loss	0.387683629989624
+epoch	480	loss	0.6903486847877502
+epoch	485	loss	0.9040740728378296
+epoch	490	loss	0.38054317235946655
+epoch	495	loss	0.9074954390525818
+epoch	500	loss	0.37656790018081665
+epoch	505	loss	0.911455512046814
+epoch	510	loss	0.37225666642189026
+epoch	515	loss	0.6920406222343445
+epoch	520	loss	0.5813541412353516
+epoch	525	loss	0.5818356275558472
+epoch	530	loss	0.5813809037208557
+epoch	535	loss	0.6966654062271118
+epoch	540	loss	0.5796090364456177
+epoch	545	loss	0.698793888092041
+epoch	550	loss	0.5850217342376709
+epoch	555	loss	0.9345395565032959
+epoch	560	loss	0.9375312328338623
+epoch	565	loss	0.7063742876052856
+epoch	570	loss	0.7087010741233826
+epoch	575	loss	0.7114671468734741
+epoch	580	loss	0.5916694402694702
+epoch	585	loss	0.9525471925735474
+epoch	590	loss	0.5780786871910095
+epoch	595	loss	0.9595366716384888
+epoch	600	loss	0.7246372103691101
+epoch	605	loss	0.6003804206848145
+epoch	610	loss	0.9702107906341553
+epoch	615	loss	0.3444685637950897
+epoch	620	loss	0.5800720453262329
+epoch	625	loss	0.34258854389190674
+epoch	630	loss	0.5812485218048096
+epoch	635	loss	0.3409699499607086
+epoch	640	loss	0.5828374624252319
+epoch	645	loss	0.3397553861141205
+epoch	650	loss	0.7581583261489868
+epoch	655	loss	0.5858054161071777
+epoch	660	loss	0.7656083106994629
+epoch	665	loss	0.6209264397621155
+epoch	670	loss	0.5892852544784546
+epoch	675	loss	0.5903358459472656
+epoch	680	loss	0.6262887716293335
+epoch	685	loss	0.6285293102264404
+epoch	690	loss	1.0331206321716309
+epoch	695	loss	0.595527172088623
+epoch	700	loss	0.7950972318649292
+epoch	705	loss	0.5981941223144531
+epoch	710	loss	0.5994929075241089
+epoch	715	loss	1.0551948547363281
+epoch	720	loss	0.33594846725463867
+epoch	725	loss	0.8146404027938843
+epoch	730	loss	0.8188645839691162
+epoch	735	loss	0.3357609808444977
+epoch	740	loss	0.6092841625213623
+epoch	745	loss	1.0821677446365356
+epoch	750	loss	1.0869253873825073
+epoch	755	loss	0.6145687103271484
+epoch	760	loss	0.6617844104766846
+epoch	765	loss	0.3362618386745453
+epoch	770	loss	0.6665388941764832
+epoch	775	loss	0.6222280263900757
+epoch	780	loss	0.6241264939308167
+epoch	785	loss	1.1207265853881836
+epoch	790	loss	0.6772884130477905
+epoch	795	loss	1.1301579475402832
+epoch	800	loss	0.6319863796234131
+epoch	805	loss	0.6851454973220825
+epoch	810	loss	0.33818307518959045
+epoch	815	loss	0.6388574838638306
+epoch	820	loss	0.9011342525482178
+epoch	825	loss	0.6958457231521606
+epoch	830	loss	1.1651029586791992
+epoch	835	loss	0.3403093218803406
+epoch	840	loss	1.175300121307373
+epoch	845	loss	1.1804859638214111
+epoch	850	loss	0.7098395824432373
+epoch	855	loss	0.658001720905304
+epoch	860	loss	0.7151379585266113
+epoch	865	loss	0.6627058982849121
+epoch	870	loss	1.2052730321884155
+epoch	875	loss	0.7236262559890747
+epoch	880	loss	1.2154316902160645
+epoch	885	loss	1.2209525108337402
+epoch	890	loss	0.3447457253932953
+epoch	895	loss	0.7354105114936829
+epoch	900	loss	0.3452571928501129
+epoch	905	loss	0.34621649980545044
+epoch	910	loss	0.34604907035827637
+epoch	915	loss	0.6880450248718262
+epoch	920	loss	0.6901571154594421
+epoch	925	loss	0.7517662048339844
+epoch	930	loss	0.3471530079841614
+epoch	935	loss	1.015100359916687
+epoch	940	loss	0.760034441947937
+epoch	945	loss	1.0260717868804932
+epoch	950	loss	0.34781140089035034
+epoch	955	loss	0.7062866687774658
+epoch	960	loss	0.3482973873615265
+epoch	965	loss	0.7748000621795654
+epoch	970	loss	1.3018379211425781
+epoch	975	loss	0.7166838049888611
+epoch	980	loss	0.3505711853504181
+epoch	985	loss	0.3504740595817566
+epoch	990	loss	1.320913553237915
+epoch	995	loss	0.7918303608894348
+epoch	1000	loss	1.326858401298523
+epoch	1005	loss	0.7971338629722595
+epoch	1010	loss	0.7996448278427124
+epoch	1015	loss	1.093164086341858
+epoch	1020	loss	1.3431408405303955
+Saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1778673154
+	4e-07
+2.8675835
+2.690229
+2.568962
+2.4812932
+2.4040337
+2.322063
+2.240469
+2.1643448
+2.032949
+1.9582363
+1.8885125
+1.8015974
+1.7792112
+1.7642657
+1.6540834
+1.7111194
+1.5421258
+1.5672445
+1.5175132
+1.487341
+1.4546512
+1.3661237
+1.2709492
+1.3014588
+1.3612922
+1.1630692
+1.3534974
+1.1880724
+1.2366126
+1.2142376
+1.252784
+0.9899962
+1.2065107
+1.1311436
+1.1118337
+1.093533
+1.0748752
+1.1024764
+1.083852
+1.0252974
+1.0887161
+1.0332448
+1.063621
+1.0019976
+0.7495357
+0.93675625
+0.7226984
+0.9464606
+1.001195
+0.8840887
+0.90811574
+0.7639681
+0.6498083
+0.63881814
+0.7342814
+0.7254908
+0.84386396
+0.7090018
+0.8260669
+0.7760816
+0.9224867
+0.9185513
+0.793773
+0.78667235
+0.536568
+0.52931225
+0.7201319
+0.51503295
+0.70641804
+0.5016741
+0.6341516
+0.6299598
+0.8908132
+0.6221696
+0.47291717
+0.4677087
+0.8869366
+0.45749205
+0.71185726
+0.60406435
+0.63858974
+0.59929156
+0.5974765
+0.698462
+0.5941781
+0.88736176
+0.59130704
+0.6918373
+0.6909098
+0.69022816
+0.8926097
+0.8936808
+0.8954492
+0.68976355
+0.8989978
+0.38768363
+0.6903487
+0.9040741
+0.38054317
+0.90749544
+0.3765679
+0.9114555
+0.37225667
+0.6920406
+0.58135414
+0.5818356
+0.5813809
+0.6966654
+0.57960904
+0.6987939
+0.58502173
+0.93453956
+0.93753123
+0.7063743
+0.7087011
+0.71146715
+0.59166944
+0.9525472
+0.5780787
+0.9595367
+0.7246372
+0.6003804
+0.9702108
+0.34446856
+0.58007205
+0.34258854
+0.5812485
+0.34096995
+0.58283746
+0.3397554
+0.7581583
+0.5858054
+0.7656083
+0.62092644
+0.58928525
+0.59033585
+0.6262888
+0.6285293
+1.0331206
+0.5955272
+0.79509723
+0.5981941
+0.5994929
+1.0551949
+0.33594847
+0.8146404
+0.8188646
+0.33576098
+0.60928416
+1.0821677
+1.0869254
+0.6145687
+0.6617844
+0.33626184
+0.6665389
+0.622228
+0.6241265
+1.1207266
+0.6772884
+1.130158
+0.6319864
+0.6851455
+0.33818308
+0.6388575
+0.90113425
+0.6958457
+1.165103
+0.34030932
+1.1753001
+1.180486
+0.7098396
+0.6580017
+0.71513796
+0.6627059
+1.205273
+0.72362626
+1.2154317
+1.2209525
+0.34474573
+0.7354105
+0.3452572
+0.3462165
+0.34604907
+0.688045
+0.6901571
+0.7517662
+0.347153
+1.0151004
+0.76003444
+1.0260718
+0.3478114
+0.70628667
+0.3482974
+0.77480006
+1.3018379
+0.7166838
+0.3505712
+0.35047406
+1.3209136
+0.79183036
+1.3268584
+0.79713386
+0.7996448
+1.0931641
+1.3431408
+

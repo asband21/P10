@@ -20,9 +20,6 @@ def lode_data(split: float = 0.1, chunk_size: int = 126, spl_amt: int = 3, seed:
     distens = [] 
     num = 0 
     for i in rows:
-        #if num > 40:
-        #    break
-        #num = num + 1
 
         sr, x = wavfile.read(i[2])
         x = x.astype("float32")

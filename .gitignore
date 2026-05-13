@@ -4,3 +4,8 @@ archive_2/
 archive_3/
 archive_4/
 .venv/
+*.wav
+*.wav.png
+cnn_data_set_2/model_fft/
+model_fft/
+flax/model/
