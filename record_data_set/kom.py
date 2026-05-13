@@ -22,7 +22,7 @@ if len(sys.argv) == 2:
     print(f" post fix {post_fix}")
 
 RATE = 384000
-SECONDS = 0.3
+SECONDS = 0.2
 PERIODSIZE = 1024
 FILE = "chunk.wav"
 
@@ -60,22 +60,27 @@ right_mick = alsaaudio.PCM(
 )
 
 
-for iii in range(50):
+for iii in range(1000):
     chunks_l = []
     chunks_h = []
     num_reads = int(RATE * SECONDS / PERIODSIZE)
 
-    for i in range(num_reads):
-        length_l, data_l = left_mick.read()
-        length_h, data_h = right_mick.read()
-        if length_l > 0 and length_h > 0:
-            chunks_l.append(np.frombuffer(data_l, dtype=np.int16))
-            chunks_h.append(np.frombuffer(data_h, dtype=np.int16))
-        if i == 2:
-            #subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dh"], check=True)
-            gpio.stdin.write("pinctrl set 17 op dh\n")
-        #if i == 15:
-    #subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dl"], check=True)
+    try:
+        for i in range(num_reads):
+            length_l, data_l = left_mick.read()
+            length_h, data_h = right_mick.read()
+            if length_l > 0 and length_h > 0:
+                chunks_l.append(np.frombuffer(data_l, dtype=np.int16))
+                chunks_h.append(np.frombuffer(data_h, dtype=np.int16))
+            if i == 1:
+                #subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dh"], check=True)
+                gpio.stdin.write("pinctrl set 17 op dh\n")
+            #if i == 15:
+        #subprocess.run(["sudo", "pinctrl", "set", "17", "op", "dl"], check=True)
+    except:
+        gpio.stdin.write("pinctrl set 17 op dl\n")
+        time.sleep(0.2)
+        continue
     gpio.stdin.write("pinctrl set 17 op dl\n")
     gpio.stdin.flush()
     # gpio lown
