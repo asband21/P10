@@ -1,0 +1,237 @@
+import json
+import sys
+import jax
+import time
+import math
+from flax import nnx
+import jax.numpy as jnp
+from pathlib import Path
+import orbax.checkpoint as ocp
+import matplotlib.pyplot as plt
+
+from scipy.io import wavfile
+
+def to_cartesian_scalar(a, d):
+    return jnp.cos(a)*d
+
+def to_cartesian(polar):
+    x = jnp.cos(polar[:,0])*polar[:,1]
+    y = jnp.sin(polar[:,0])*polar[:,1]
+    return jnp.array([x,y]).T
+
+class SimpleNN(nnx.Module):
+    def __init__(self, n_features: int = 19200, n_hidden: int = 255, n_targets: int = 26, *, rngs: nnx.Rngs):
+        self.n_features = n_features
+        self.layer1 = nnx.Linear(int(n_features), n_hidden, rngs=rngs)
+        self.layer2 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
+        self.layer3 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
+        self.layer4 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
+        self.layer5 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
+        self.layer6 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
+        self.output = nnx.Linear(n_hidden, n_targets, rngs=rngs)
+
+    def __call__(self, x):
+        x = nnx.relu6(self.layer1(x))
+        x = nnx.relu6(self.layer2(x))
+        x = nnx.relu6(self.layer3(x))
+        x = nnx.relu6(self.layer4(x))
+        x = nnx.relu6(self.layer5(x))
+        x = nnx.relu6(self.layer6(x))
+        x = self.output(x)
+        return x
+
+angle_path = ""
+distance_path = ""
+sound_path = ""
+
+# In the case where we want to load the models directly, we have to uncomment this.
+if False:
+    if len(sys.argv) != 4:
+        print("Command must be in this form:\n script.py Wide_Long_angle_data.json Wide_Long_distance_data.json Wide_Long_sound.wav")
+        sys.exit(1)
+    angle_path = sys.argv[1]
+    distance_path = sys.argv[2]
+    sound_path = sys.argv[3]
+
+else:
+    with open("archive_1_data.csv", "r") as f:
+        rows = [line.strip().split("\t") for line in f]
+    key = jax.random.key(int(time.time()))
+    idx = jax.random.randint(key, shape=(), minval=0, maxval=len(rows)-1)
+    #print("idx:"+ str(idx) + "\t" + rows[idx][0] + "\t" +rows[idx][1] + "\t" + rows[idx][2])
+    angle_path = rows[idx][0]
+    distance_path = rows[idx][1]
+    sound_path = rows[idx][2]
+
+## Load data
+angle = json.load(open(angle_path))
+distance = json.load(open(distance_path))
+sr, x = wavfile.read(sound_path)
+
+"""
+#lode audio
+x = x.astype("float32")
+x = x / 32768.0
+#spl_amt = 3
+chunk_size = math.ceil(sr / 200)
+print(chunk_size)
+#x = x[:len(x) // spl_amt]
+n_chunks = len(x) // chunk_size
+x = x[:n_chunks * chunk_size]
+x_spl_0 = jnp.array(x[:,0]).reshape(n_chunks, chunk_size)
+x_spl_1 = jnp.array(x[:,1]).reshape(n_chunks, chunk_size)
+x_fft_0 = jnp.log1p(jnp.abs(jnp.fft.fft(x_spl_0, axis=-1)))
+x_fft_1 = jnp.log1p(jnp.abs(jnp.fft.fft(x_spl_1, axis=-1)))
+#x_fft_0 = jnp.abs(jnp.fft.rfft(x_spl_0, axis=-1))
+#x_fft_1 = jnp.abs(jnp.fft.rfft(x_spl_1, axis=-1))
+x_fft = jnp.array([x_fft_0, x_fft_1], dtype=jnp.float32).flatten()
+
+polar_data = jnp.array([angle["LiDAR_angle"], distance["LiDAR_distance"]]).T
+"""
+
+print("sample rate:", sr)
+print("dtype before:", x.dtype)
+print("shape:", x.shape)
+print("min before:", jnp.min(x))
+print("max before:", jnp.max(x))
+
+# Convert safely
+x = x.astype(jnp.float32)
+
+# Only normalise if the WAV was integer-like
+#if jnp.max(jnp.abs(x)) > 1.5:
+x = x / 32768.0
+
+print("dtype after:", x.dtype)
+print("min after:", jnp.min(x))
+print("max after:", jnp.max(x))
+
+# Choose chunk size
+chunk_size = math.ceil(sr / 220*1)   # 5 ms chunks
+# chunk_size = 1024
+# chunk_size = 2048
+# chunk_size = 4096
+
+n_chunks = len(x) // chunk_size
+x = x[:n_chunks * chunk_size]
+
+x_spl_0 = x[:, 0].reshape(n_chunks, chunk_size)
+#x_spl_1 = x[:, 1].reshape(n_chunks, chunk_size)
+x_fft_0 = jnp.abs(jnp.fft.rfft(x_spl_0, axis=-1))
+x_fft_0 = jnp.log1p(x_fft_0)
+#x_fft_0 = jnp.abs(jnp.fft.rfft(x_spl_0, axis=-1))
+
+print("chunk_size:", chunk_size)
+print("n_chunks:", n_chunks)
+print("x_spl_0 shape:", x_spl_0.shape)
+
+# Better contrast for small signals
+#limit = jnp.percentile(x_fft_0, 99)
+
+plt.figure(figsize=(12, 6))
+
+plt.imshow(
+    x_fft_0.T,
+    aspect="auto",
+    origin="lower",
+    cmap="seismic",
+    #vmin=-limit,
+    #vmax=limit,
+    extent=[ 0, chunk_size / sr * 1000, 0, n_chunks * chunk_size / sr ]
+)
+
+plt.xlabel("Time inside chunk [ms]")
+plt.ylabel("Time through audio [s]")
+plt.title(f"Channel 0 raw waveform chunks, chunk size = {chunk_size} samples")
+plt.colorbar(label="Amplitude")
+
+plt.tight_layout()
+plt.show()
+
+"""
+## lode model 
+n_f = 68224
+n_t = 1081
+model = SimpleNN(n_features = n_f, n_targets = n_t , rngs=nnx.Rngs(0))
+
+_, state = nnx.split(model)
+
+checkpointer = ocp.StandardCheckpointer()
+checkpoint_path = Path("model_fft/1778496791/state").resolve()
+state = checkpointer.restore(checkpoint_path, state)
+nnx.update(model, state)
+
+## model pridiksin
+data = model(x_fft)
+print(data)
+print(jnp.shape(data))
+model_data = jnp.array([angle["LiDAR_angle"], data]).T
+print(model_data)
+
+## Transform data
+cartesian_data = to_cartesian(polar_data)
+cartesian_model_data = to_cartesian(model_data)
+
+## Plot data
+x_vals = jnp.array(cartesian_data[:, 0])
+y_vals = jnp.array(cartesian_data[:, 1])
+x_vals_model = jnp.array(cartesian_model_data[:, 0])
+y_vals_model = jnp.array(cartesian_model_data[:, 1])
+
+plt.figure()
+plt.scatter(x_vals, y_vals)
+plt.scatter(x_vals_model, y_vals_model)
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("LiDAR XY Plot")
+plt.axis("equal")
+plt.show()
+plt.figure(figsize=(12, 6))
+
+plt.imshow(
+    x_spl_0,
+    aspect="auto",
+    origin="lower",
+    extent=[ 0, chunk_size, 0, n_chunks]
+)
+
+plt.xlabel("Sample inside chunk")
+plt.ylabel("Chunk index")
+plt.title(f"Channel 0 split into chunks, chunk size = {chunk_size}")
+plt.colorbar(label="Amplitude")
+
+plt.tight_layout()
+plt.show()
+
+
+spectrogram_0 = x_fft_0
+spectrogram_1 = x_fft_1
+
+plt.figure()
+
+plt.subplot(2, 1, 1)
+plt.imshow(
+    spectrogram_0.T,
+    aspect="auto",
+    origin="lower",
+    extent=[0, len(x) / sr, 0, sr / 2]
+)
+plt.ylabel("Frequency [Hz]")
+plt.title("Audio Spectrogram, Channel 0")
+plt.colorbar(label="log magnitude")
+
+plt.subplot(2, 1, 2)
+plt.imshow(
+    spectrogram_1.T, 
+    aspect="auto",
+    origin="lower",
+    extent=[0, len(x) / sr, 0, sr / 2]
+)
+plt.xlabel("Time [s]")
+plt.ylabel("Frequency [Hz]")
+plt.title("Audio Spectrogram, Channel 1")
+plt.colorbar(label="log magnitude")
+
+plt.tight_layout()
+plt.show()
+"""

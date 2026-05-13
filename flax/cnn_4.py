@@ -85,7 +85,7 @@ class CNN(nnx.Module):
         self.layer1 = nnx.Conv(in_features=out_feat, out_features=out_feat, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer2 = nnx.Conv(in_features=out_feat, out_features=out_feat, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer3 = nnx.Conv(in_features=out_feat, out_features=1, kernel_size=(5,5),  padding='VALID', rngs=rngs)
-        self.layer4 = nnx.Linear((l - 4*4) * (h - 4*4), n_hidden, rngs=rngs)
+        self.layer4 = nnx.Linear((l - 4*3) * (h - 4*3), n_hidden, rngs=rngs)
         #self.layer4 = nnx.Linear((l - 2*4) * (h - 2*4), n_hidden, rngs=rngs)
         self.layer5 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
         self.layer6 = nnx.Linear(n_hidden, n_hidden, rngs=rngs)
@@ -105,7 +105,7 @@ class CNN(nnx.Module):
 
 chunk_size = 126
 noise = 0.10
-l_r=0.01
+l_r=0.001
 
 
 images_train, label_train, images_test, label_test, mapped_labels, n_chunks = lode_data()
@@ -128,7 +128,8 @@ run_dir = Path.cwd() / "model_cnn" / str(run_id)
 os.makedirs(run_dir)
 
 checkpointer = ocp.StandardCheckpointer()
-optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=l_r), wrt=nnx.Param, )
+#optimizer = nnx.Optimizer(model, optax.sgd(learning_rate=l_r), wrt=nnx.Param, )
+optimizer = nnx.Optimizer(model, optax.adam(learning_rate=l_r), wrt=nnx.Param, )
 
 key = jax.random.key(int(time.time()))
 
