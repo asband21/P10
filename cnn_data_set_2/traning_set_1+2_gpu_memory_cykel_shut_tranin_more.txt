@@ -1,0 +1,315 @@
+ All right, this seems to be going well with the two different datasets. The error is going down way slower, but I think it still works. And the CPU, GPU, memory axis thing seems to be working fairly well. And now we have to see if we can handle handling training more on this model. But yeah, it seems promising, so we have batch instances.
+
+klyx@8D:~/git/p10/P10/cnn_data_set_2$ python3 fft_olde_traning_bash_2_np.py 
+lode test 3000/3667
+lode train 33000/33003SimpleNN( # Param: 97,968,148 (391.9 MB)
+  n_features=41668,
+  layer1=Linear( # Param: 85,338,112 (341.4 MB)
+    kernel=Param( # 85,336,064 (341.3 MB)
+      value=Array(shape=(41668, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=41668,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f8970dd5bd0>,
+    bias_init=<function zeros at 0x7f896ff23640>,
+    dot_general=<function dot_general at 0x7f8970791630>,
+    promote_dtype=<function promote_dtype at 0x7f8970dd5b40>
+  ),
+  layer2=Linear( # Param: 4,196,352 (16.8 MB)
+    kernel=Param( # 4,194,304 (16.8 MB)
+      value=Array(shape=(2048, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f8970dd5bd0>,
+    bias_init=<function zeros at 0x7f896ff23640>,
+    dot_general=<function dot_general at 0x7f8970791630>,
+    promote_dtype=<function promote_dtype at 0x7f8970dd5b40>
+  ),
+  layer3=Linear( # Param: 4,196,352 (16.8 MB)
+    kernel=Param( # 4,194,304 (16.8 MB)
+      value=Array(shape=(2048, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f8970dd5bd0>,
+    bias_init=<function zeros at 0x7f896ff23640>,
+    dot_general=<function dot_general at 0x7f8970791630>,
+    promote_dtype=<function promote_dtype at 0x7f8970dd5b40>
+  ),
+  layer4=Linear( # Param: 4,196,352 (16.8 MB)
+    kernel=Param( # 4,194,304 (16.8 MB)
+      value=Array(shape=(2048, 2048), dtype=dtype('float32'))
+    ),
+    bias=Param( # 2,048 (8.2 KB)
+      value=Array(shape=(2048,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=2048,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f8970dd5bd0>,
+    bias_init=<function zeros at 0x7f896ff23640>,
+    dot_general=<function dot_general at 0x7f8970791630>,
+    promote_dtype=<function promote_dtype at 0x7f8970dd5b40>
+  ),
+  output=Linear( # Param: 40,980 (163.9 KB)
+    kernel=Param( # 40,960 (163.8 KB)
+      value=Array(shape=(2048, 20), dtype=dtype('float32'))
+    ),
+    bias=Param( # 20 (80 B)
+      value=Array(shape=(20,), dtype=dtype('float32'))
+    ),
+    in_features=2048,
+    out_features=20,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7f8970dd5bd0>,
+    bias_init=<function zeros at 0x7f896ff23640>,
+    dot_general=<function dot_general at 0x7f8970791630>,
+    promote_dtype=<function promote_dtype at 0x7f8970dd5b40>
+  )
+)
+noise 0.02 learning rate 2e-07 batch_size 1000 epoch 512k seed 1778782293 n_f 41668 n_t 20 minimum_fri 20000
+[ 0.00529765 -0.0691587   0.0502343  -0.26090154  0.01222785 -0.01564685
+  0.11145355 -0.07115068 -0.03184299 -0.08124245  0.0946282  -0.16563028
+ -0.05826469  0.24229622  0.17771208 -0.13389464  0.2538067  -0.02449442
+ -0.18266799  0.24723333] = model([0.08880615 0.19430347 0.20354827 ... 0.00143507 0.0007238  0.00341797])
+2026-05-14 20:12:01.713110: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+epoch	0	loss	2.997403383255005
+epoch	5	loss	2.87381911277771
+epoch	10	loss	2.789668321609497
+epoch	15	loss	2.713660717010498
+epoch	20	loss	2.6341934204101562
+epoch	25	loss	2.5512444972991943
+epoch	30	loss	2.46453857421875
+epoch	35	loss	2.3795483112335205
+epoch	40	loss	2.296172618865967
+epoch	45	loss	2.2174220085144043
+epoch	50	loss	2.143012046813965
+epoch	55	loss	2.073049783706665
+epoch	60	loss	2.007193088531494
+epoch	65	loss	1.945265293121338
+epoch	70	loss	1.8870805501937866
+epoch	75	loss	1.8316237926483154
+epoch	80	loss	1.779125690460205
+epoch	85	loss	1.7297505140304565
+epoch	90	loss	1.6824290752410889
+epoch	95	loss	1.6377618312835693
+epoch	100	loss	1.5950615406036377
+epoch 100 saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1778782316/state_100
+epoch	105	loss	1.5537183284759521
+epoch	110	loss	1.5141246318817139
+epoch	115	loss	1.4757447242736816
+epoch	120	loss	1.4392616748809814
+epoch	125	loss	1.4044361114501953
+epoch	130	loss	1.3705105781555176
+epoch	135	loss	1.3383195400238037
+epoch	140	loss	1.307053804397583
+epoch	145	loss	1.2771265506744385
+epoch	150	loss	1.2484807968139648
+epoch	155	loss	1.2203967571258545
+epoch	160	loss	1.1932072639465332
+epoch	165	loss	1.1671805381774902
+epoch	170	loss	1.142292857170105
+epoch	175	loss	1.1181776523590088
+epoch	180	loss	1.0948901176452637
+epoch	185	loss	1.072234034538269
+epoch	190	loss	1.0505056381225586
+epoch	195	loss	1.0289734601974487
+epoch	200	loss	1.0091665983200073
+epoch 200 saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1778782316/state_200
+epoch	205	loss	0.9891176223754883
+epoch	210	loss	0.9699587225914001
+epoch	215	loss	0.951205849647522
+epoch	220	loss	0.9332776665687561
+epoch	225	loss	0.9164090156555176
+epoch	230	loss	0.8991675972938538
+epoch	235	loss	0.882748007774353
+epoch	240	loss	0.8665860891342163
+epoch	245	loss	0.8510891199111938
+epoch	250	loss	0.8356629014015198
+epoch	255	loss	0.8205595016479492
+epoch	260	loss	0.8063845634460449
+epoch	265	loss	0.7925066351890564
+epoch	270	loss	0.7787433862686157
+epoch	275	loss	0.7654874324798584
+epoch	280	loss	0.7530627846717834
+epoch	285	loss	0.7407344579696655
+epoch	290	loss	0.7286044359207153
+epoch	295	loss	0.7165467739105225
+epoch	300	loss	0.7051356434822083
+epoch 300 saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1778782316/state_300
+epoch	305	loss	0.6937761306762695
+epoch	310	loss	0.6829972267150879
+epoch	315	loss	0.6721999645233154
+epoch	320	loss	0.6617262363433838
+epoch	325	loss	0.6517558097839355
+epoch	330	loss	0.6415175199508667
+epoch	335	loss	0.6316664814949036
+epoch	340	loss	0.6219278573989868
+epoch	345	loss	0.6125205755233765
+epoch	350	loss	0.603779673576355
+epoch	355	loss	0.5950173735618591
+epoch	360	loss	0.5861412882804871
+epoch	365	loss	0.5778383612632751
+epoch	370	loss	0.5694509744644165
+epoch	375	loss	0.5614662170410156
+epoch	380	loss	0.5531867146492004
+epoch	385	loss	0.5456085205078125
+epoch	390	loss	0.5379830598831177
+epoch	395	loss	0.5303701162338257
+epoch	400	loss	0.5233378410339355
+epoch 400 saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1778782316/state_400
+epoch	405	loss	0.5162075161933899
+epoch	410	loss	0.5091033577919006
+epoch	415	loss	0.5027718544006348
+epoch	420	loss	0.495800644159317
+epoch	425	loss	0.48957759141921997
+epoch	430	loss	0.4829332232475281
+epoch	435	loss	0.4762125611305237
+epoch	440	loss	0.4707920551300049
+epoch	445	loss	0.4646567106246948
+epoch	450	loss	0.4586077332496643
+epoch	455	loss	0.4527837336063385
+epoch	460	loss	0.4465126097202301
+epoch	465	loss	0.44130411744117737
+epoch	470	loss	0.4355563521385193
+epoch	475	loss	0.43001729249954224
+epoch	480	loss	0.42478328943252563
+epoch	485	loss	0.41959279775619507
+epoch	490	loss	0.41470885276794434
+epoch	495	loss	0.40917059779167175
+epoch	500	loss	0.40486735105514526
+epoch	505	loss	0.39939191937446594
+epoch	510	loss	0.39518100023269653
+Saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1778782316
+2.9974034
+2.873819
+2.7896683
+2.7136607
+2.6341934
+2.5512445
+2.4645386
+2.3795483
+2.2961726
+2.217422
+2.143012
+2.0730498
+2.007193
+1.9452653
+1.8870806
+1.8316238
+1.7791257
+1.7297505
+1.6824291
+1.6377618
+1.5950615
+1.5537183
+1.5141246
+1.4757447
+1.4392617
+1.4044361
+1.3705106
+1.3383195
+1.3070538
+1.2771266
+1.2484808
+1.2203968
+1.1932073
+1.1671805
+1.1422929
+1.1181777
+1.0948901
+1.072234
+1.0505056
+1.0289735
+1.0091666
+0.9891176
+0.9699587
+0.95120585
+0.93327767
+0.916409
+0.8991676
+0.882748
+0.8665861
+0.8510891
+0.8356629
+0.8205595
+0.80638456
+0.79250664
+0.7787434
+0.76548743
+0.7530628
+0.74073446
+0.72860444
+0.7165468
+0.70513564
+0.69377613
+0.6829972
+0.67219996
+0.66172624
+0.6517558
+0.6415175
+0.6316665
+0.62192786
+0.6125206
+0.6037797
+0.5950174
+0.5861413
+0.57783836
+0.569451
+0.5614662
+0.5531867
+0.5456085
+0.53798306
+0.5303701
+0.52333784
+0.5162075
+0.50910336
+0.50277185
+0.49580064
+0.4895776
+0.48293322
+0.47621256
+0.47079206
+0.4646567
+0.45860773
+0.45278373
+0.4465126
+0.44130412
+0.43555635
+0.4300173
+0.4247833
+0.4195928
+0.41470885
+0.4091706
+0.40486735
+0.39939192
+0.395181
+

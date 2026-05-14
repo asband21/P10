@@ -13,16 +13,30 @@ import orbax.checkpoint as ocp
 #jax.config.update('jax_platform_name', 'cpu')
 
 def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batch_size: int = 64):
-    with open("./data_set/data_set_2_shuffel.csv", "r") as f:
+    #with open("./data_set/data_set_2_shuffel.csv", "r") as f:
+    with open("./data_set/data_set_clean.csv", "r") as f:
         rows = [line.strip().split("\t") for line in f]
+    for lolo in rows:
+        lolo[3] = "data_set/" + lolo[3]
 
-    
+    with open("./data_set_2/data_set_clean.csv", "r") as f_2:
+        rows_2 = [line.strip().split("\t") for line in f_2]
+    for lol in rows_2:
+        lol[3] = "data_set_2/" + lol[3]
+    rows.extend(rows_2)
+
+    key = jax.random.key(seed)
+    shuffled_indices = jax.random.permutation(key, len(rows))
+    rows_shuffled = []
+    for lll in shuffled_indices:
+        rows_shuffled.append(rows[lll])
+
     si = int(len(rows)*split) #split_index
-    rows_test = rows[:si]
-    rows_train = rows[si:]
+    rows_test = rows_shuffled[:si]
+    rows_train = rows_shuffled[si:]
 
-    old_labels = [5, 7, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 60]
-    new_labels = [0, 1, 2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    old_labels = [5, 7, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60]
+    new_labels = [0, 1, 2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     
     images_train = []
     images_test  = []
@@ -31,6 +45,7 @@ def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batc
     labels_test  = []
     d = 1
     for bash_num in range(0, int(len(rows_test)/d), batch_size):
+        print(f"\rlode test {bash_num}/{len(rows_test)}", end='')
         batch_rows = rows_test[bash_num:bash_num + batch_size]
         images = []
         labels  = []
@@ -38,8 +53,8 @@ def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batc
         for i in batch_rows:
             #if i[0] == 0:
             #    continue
-            print(i)
-            sr, x = wavfile.read("data_set/"+i[3])
+            #print(i)
+            sr, x = wavfile.read(i[3])
             chunk_size = math.ceil(sr / min_fri)  
             x = x.astype("float32")
             x = x / 32768.0
@@ -64,14 +79,15 @@ def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batc
         labels = apply_label_mapping(labels, old_labels, new_labels)
         labels = jnp.asarray(labels, dtype=jnp.int32)
         labels_test.append(labels)
-
+    print()
     for bash_num in range(0, int(len(rows_train)/d), batch_size):
+        print(f"\rlode train {bash_num}/{len(rows_train)}", end='')
         batch_rows = rows_train[bash_num:bash_num + batch_size]
         images = []
         labels  = []
 
         for i in batch_rows:
-            sr, x = wavfile.read("data_set/"+i[3])
+            sr, x = wavfile.read(i[3])
             x = x.astype("float32")
             x = x / 32768.0
             
@@ -94,8 +110,6 @@ def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batc
         labels = apply_label_mapping(labels, old_labels, new_labels)
         labels = jnp.asarray(labels, dtype=jnp.int32)
         labels_train.append(labels)
-
-    #unique_labels, mapped_labels = jnp.unique(labels_train, return_inverse=True)
 
     return images_train, labels_train, images_test, labels_test, n_chunks
 
@@ -144,65 +158,70 @@ class SimpleNN(nnx.Module):
         #x = self.layer3(x)
         return x
 
-noise = 0.01
+noise = 0.02
 l_r=0.0000002
 #l_r=0.0000004
-
-batch_size = 32
-images_train, labels_train, images_test, labels_test, n_chunks = lode_data(batch_size = batch_size)
-
+#batch_size = 32/2
+batch_size = 64
+epoch = 256*2
+minimum_fri = 20000
+seed = int(time.time())
 n_f = 22656
-#n_f = 44604
-#n_f = 22506
 n_f = 41668
-n_t = 19
+n_t = 20
+
+images_train, labels_train, images_test, labels_test, n_chunks = lode_data(min_fri=minimum_fri, batch_size = batch_size)
 model = SimpleNN(n_features = n_f, n_targets = n_t, rngs=nnx.Rngs(0), n_hidden = 2048)
+
 nnx.display(model)  # Interactive display if penzai is installed.
-
+print(f"noise {noise} learning rate {l_r} batch_size {batch_size} epoch {epoch}k seed {seed} n_f {n_f} n_t {n_t} minimum_fri {minimum_fri}")
 print(f"{model(images_train[0][0])} = model({images_train[0][0]})")
-
 
 run_id = int(time.time())
 run_dir = Path.cwd() / "model_fft" / str(run_id)
-os.makedirs(run_dir)
+#os.makedirs(run_dir)
+run_dir.mkdir(parents=True, exist_ok=True)
 
 checkpointer = ocp.StandardCheckpointer()
 optimizer = nnx.Optimizer(model, optax.adam(learning_rate=l_r), wrt=nnx.Param, )
 
-key = jax.random.key(int(time.time()))
+key = jax.random.key(seed)
 loserade = []
-for epoch in range(256*4):
-    #for bash_i in : 
-    #print(images_train)
-    #print(len(images_train))
+for epoch in range(epoch):
+    # train model 
+    key, k = jax.random.split(key)
+    shuffled_indices = jax.random.permutation(k, len(images_train))
     for im_tr in range(len(images_train)):
-        #key, k = jax.random.split(key)
-        #noisy_images_train = images_train + jax.random.normal(k, shape=images_train.shape, dtype=images_train.dtype) * noise
-        train_step(model, optimizer, images_train[im_tr], labels_train[im_tr])
+        key, k = jax.random.split(key)
+        idx = int(shuffled_indices[im_tr])
+        noisy_images_train = images_train[idx] + jax.random.normal(k, shape=images_train[idx].shape, dtype=images_train[idx].dtype) * noise
+        train_step(model, optimizer, noisy_images_train, labels_train[idx])
     
-    #if epoch % 5 == 0:  # Print metrics.
-    #    key, k = jax.random.split(key)
-    #    r_i = jax.random.randint(k, shape=(), minval=0, maxval=len(images_test))
-    #    loss, _ = loss_fun(model, images_test[r_i], labels_test[r_i])
-    #    loserade.append(loss)
-    #    print(f"epoch\t{epoch}\tloss\t{loss}")
-    
-    if epoch % 5 == 0:  # Print metrics.
+    if epoch % 5 == 0:  # print loss.
         loss_sum = 0
         for im_tr in range(len(images_test)):
             loss, _ = loss_fun(model, images_test[im_tr], labels_test[im_tr])
             loss_sum = loss_sum + loss
         loserade.append(loss_sum/len(images_test))
-        print(f"epoch\t{epoch}\tloss\t{loss_sum}")
+        print(f"epoch\t{epoch}\tloss\t{loss_sum/len(images_test)}")
 
+    if epoch in {100, 200, 300, 400}: # save model
+        _, state = nnx.split(model)
+        state_cpu = jax.device_get(state)
+        ckpt_path = run_dir / f"state_{epoch}"
+        checkpointer.save(ckpt_path, state_cpu)
+        checkpointer.wait_until_finished()
+        del state_cpu
+        del state
+        jax.clear_caches()
+        print(f"epoch {epoch} saved checkpoint to: {ckpt_path}")
 
 _, state = nnx.split(model)
-run_dir.mkdir(parents=True, exist_ok=True)
-checkpointer.save(run_dir / "state", state)
+state_cpu = jax.device_get(state)
+checkpointer.save(run_dir / "state_last", state)
 checkpointer.wait_until_finished()
-
+del state_cpu
 print(f"Saved checkpoint to: {run_dir}")
 
-print(f"\t{l_r}")
 for i in loserade:
     print(i)
