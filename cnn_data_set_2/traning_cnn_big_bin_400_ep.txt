@@ -1,0 +1,399 @@
+klyx@8D:~/git/p10/P10/cnn_data_set_2$ python cnn_big_big.py 
+lode test 3654/3667
+lode train 32886/33003(394, 97, 1)
+cnn( # Param: 31,688,405 (126.8 MB)
+  layer1=Conv( # Param: 832 (3.3 KB)
+    kernel_shape=(5, 5, 1, 32),
+    kernel=Param( # 800 (3.2 KB)
+      value=Array(shape=(5, 5, 1, 32), dtype=dtype('float32'))
+    ),
+    bias=Param( # 32 (128 B)
+      value=Array(shape=(32,), dtype=dtype('float32'))
+    ),
+    in_features=1,
+    out_features=32,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    conv_general_dilated=<function conv_general_dilated at 0x7ff3449212d0>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer2=Conv( # Param: 25,632 (102.5 KB)
+    kernel_shape=(5, 5, 32, 32),
+    kernel=Param( # 25,600 (102.4 KB)
+      value=Array(shape=(5, 5, 32, 32), dtype=dtype('float32'))
+    ),
+    bias=Param( # 32 (128 B)
+      value=Array(shape=(32,), dtype=dtype('float32'))
+    ),
+    in_features=32,
+    out_features=32,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    conv_general_dilated=<function conv_general_dilated at 0x7ff3449212d0>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer3=Conv( # Param: 25,632 (102.5 KB)
+    kernel_shape=(5, 5, 32, 32),
+    kernel=Param( # 25,600 (102.4 KB)
+      value=Array(shape=(5, 5, 32, 32), dtype=dtype('float32'))
+    ),
+    bias=Param( # 32 (128 B)
+      value=Array(shape=(32,), dtype=dtype('float32'))
+    ),
+    in_features=32,
+    out_features=32,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    conv_general_dilated=<function conv_general_dilated at 0x7ff3449212d0>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer4=Conv( # Param: 25,632 (102.5 KB)
+    kernel_shape=(5, 5, 32, 32),
+    kernel=Param( # 25,600 (102.4 KB)
+      value=Array(shape=(5, 5, 32, 32), dtype=dtype('float32'))
+    ),
+    bias=Param( # 32 (128 B)
+      value=Array(shape=(32,), dtype=dtype('float32'))
+    ),
+    in_features=32,
+    out_features=32,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    conv_general_dilated=<function conv_general_dilated at 0x7ff3449212d0>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer5=Conv( # Param: 801 (3.2 KB)
+    kernel_shape=(5, 5, 32, 1),
+    kernel=Param( # 800 (3.2 KB)
+      value=Array(shape=(5, 5, 32, 1), dtype=dtype('float32'))
+    ),
+    bias=Param( # 1 (4 B)
+      value=Array([0.], dtype=float32)
+    ),
+    in_features=32,
+    out_features=1,
+    kernel_size=(5, 5),
+    strides=1,
+    padding='VALID',
+    input_dilation=1,
+    kernel_dilation=1,
+    feature_group_count=1,
+    use_bias=True,
+    mask=None,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    conv_general_dilated=<function conv_general_dilated at 0x7ff3449212d0>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer6=Linear( # Param: 29,490,176 (118.0 MB)
+    kernel=Param( # 29,489,152 (118.0 MB)
+      value=Array(shape=(28798, 1024), dtype=dtype('float32'))
+    ),
+    bias=Param( # 1,024 (4.1 KB)
+      value=Array(shape=(1024,), dtype=dtype('float32'))
+    ),
+    in_features=28798,
+    out_features=1024,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    dot_general=<function dot_general at 0x7ff3448c5750>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer7=Linear( # Param: 1,049,600 (4.2 MB)
+    kernel=Param( # 1,048,576 (4.2 MB)
+      value=Array(shape=(1024, 1024), dtype=dtype('float32'))
+    ),
+    bias=Param( # 1,024 (4.1 KB)
+      value=Array(shape=(1024,), dtype=dtype('float32'))
+    ),
+    in_features=1024,
+    out_features=1024,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    dot_general=<function dot_general at 0x7ff3448c5750>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  layer8=Linear( # Param: 1,049,600 (4.2 MB)
+    kernel=Param( # 1,048,576 (4.2 MB)
+      value=Array(shape=(1024, 1024), dtype=dtype('float32'))
+    ),
+    bias=Param( # 1,024 (4.1 KB)
+      value=Array(shape=(1024,), dtype=dtype('float32'))
+    ),
+    in_features=1024,
+    out_features=1024,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    dot_general=<function dot_general at 0x7ff3448c5750>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  ),
+  output=Linear( # Param: 20,500 (82.0 KB)
+    kernel=Param( # 20,480 (81.9 KB)
+      value=Array(shape=(1024, 20), dtype=dtype('float32'))
+    ),
+    bias=Param( # 20 (80 B)
+      value=Array(shape=(20,), dtype=dtype('float32'))
+    ),
+    in_features=1024,
+    out_features=20,
+    use_bias=True,
+    dtype=None,
+    param_dtype=float32,
+    precision=None,
+    kernel_init=<function variance_scaling.<locals>.init at 0x7ff344efdcf0>,
+    bias_init=<function zeros at 0x7ff34403f760>,
+    dot_general=<function dot_general at 0x7ff3448c5750>,
+    promote_dtype=<function promote_dtype at 0x7ff344efdc60>
+  )
+)
+noise 0.0002 learning rate 4e-07 batch_size 126 epoch 1024k seed 1779025353 n_f 41668 n_t 20 minimum_fri 2000
+[[-0.00294726  0.01313371 -0.01230437  0.00356393  0.02310639  0.01911007
+   0.01382714 -0.01335461  0.02136781 -0.01067605 -0.01207987  0.00335813
+  -0.00841166  0.00985685 -0.00035102 -0.01081924  0.00414508 -0.02683036
+   0.00653582  0.00448351]] = model([[[4.4210815e-01]
+  [1.8021919e-01]
+  [1.8710586e-01]
+  ...
+  [1.7457729e-02]
+  [2.6481522e-02]
+  [2.7465820e-04]]
+
+ [[1.7187500e-01]
+  [1.0068268e-01]
+  [1.9312821e-01]
+  ...
+  [1.2327191e-02]
+  [6.4600110e-03]
+  [3.0395508e-02]]
+
+ [[1.6610413e+00]
+  [2.7836365e-01]
+  [1.3922262e-01]
+  ...
+  [4.6310653e-03]
+  [4.6343338e-03]
+  [4.6081543e-03]]
+
+ ...
+
+ [[3.9321899e-01]
+  [1.7706724e-01]
+  [1.2883019e-01]
+  ...
+  [1.1328842e-02]
+  [6.5904227e-03]
+  [8.6364746e-03]]
+
+ [[5.8361816e-01]
+  [2.5566742e-01]
+  [4.8599210e-02]
+  ...
+  [7.9704411e-03]
+  [1.0773248e-02]
+  [6.3476562e-03]]
+
+ [[7.9089355e-01]
+  [2.5020975e-01]
+  [1.5068428e-01]
+  ...
+  [2.0078549e-02]
+  [8.7690204e-03]
+  [9.8266602e-03]]])
+2026-05-17 15:43:25.699605: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.91GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:43:29.684860: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.08GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:43:33.437218: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-input.6 = (f32[126,32,386,89]{3,2,1,0}, u8[0]{0}) custom-call(%select.9, %bitcast.491), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardInput", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:33.460119: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.022986043s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-input.6 = (f32[126,32,386,89]{3,2,1,0}, u8[0]{0}) custom-call(%select.9, %bitcast.491), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardInput", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:33.849686: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.26GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:43:35.976686: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.51GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:43:37.688631: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-input.7 = (f32[126,32,390,93]{3,2,1,0}, u8[0]{0}) custom-call(%select.10, %bitcast.489), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardInput", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:37.779766: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.0911806s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-input.7 = (f32[126,32,390,93]{3,2,1,0}, u8[0]{0}) custom-call(%select.10, %bitcast.489), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardInput", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:44.830183: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng57{k2=0,k13=2,k14=2,k18=1,k23=0} for conv %cudnn-conv-bw-filter.6 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.8, %select.10), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:44.848560: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.018445106s
+Trying algorithm eng57{k2=0,k13=2,k14=2,k18=1,k23=0} for conv %cudnn-conv-bw-filter.6 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.8, %select.10), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:45.848670: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.6 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.8, %select.10), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:46.350526: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.501942879s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.6 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.8, %select.10), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:52.764288: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.7 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.9, %select.9), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:53.183236: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.418986232s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.7 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.9, %select.9), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:59.323606: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.8 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.10, %select.8), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:43:59.659655: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.336087918s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.8 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.10, %select.8), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:02.004590: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 4.71GiB (5052111932 bytes) by rematerialization; only reduced to 4.95GiB (5313530812 bytes), down from 5.50GiB (5901606092 bytes) originally
+2026-05-17 15:44:26.955156: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.71GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:44:30.705063: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.86GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:44:34.628438: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.02GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:44:36.628068: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.51GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:44:38.300841: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-input.7 = (f32[117,32,390,93]{3,2,1,0}, u8[0]{0}) custom-call(%select.10, %bitcast.489), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardInput", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:38.324146: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.023378214s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-input.7 = (f32[117,32,390,93]{3,2,1,0}, u8[0]{0}) custom-call(%select.10, %bitcast.489), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardInput", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:46.142862: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.6 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.8, %select.10), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:46.544291: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.401503237s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.6 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.8, %select.10), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:52.606674: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.7 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.9, %select.9), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:52.930855: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.324243982s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.7 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.9, %select.9), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:58.705663: E external/xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.8 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.10, %select.8), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:44:58.964637: E external/xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.259025814s
+Trying algorithm eng0{} for conv %cudnn-conv-bw-filter.8 = (f32[32,32,5,5]{3,2,1,0}, u8[0]{0}) custom-call(%clamp.10, %select.8), window={size=5x5}, dim_labels=bf01_oi01->bf01, custom_call_target="__cudnn$convBackwardFilter", metadata={op_name="jit(train_step)/jit(main)/conv_general_dilated" source_file="/home/klyx/.local/lib/python3.10/site-packages/flax/nnx/nn/linear.py" source_line=808}, backend_config={"operation_queue_id":"0","wait_on_operation_queues":[],"cudnn_conv_backend_config":{"conv_result_scale":1,"activation_mode":"kNone","side_input_scale":0,"leakyrelu_alpha":0},"force_earliest_schedule":false,"reification_cost":[]} is taking a while...
+2026-05-17 15:45:56.832180: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.11GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:45:57.737027: W external/xla/xla/tsl/framework/bfc_allocator.cc:310] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.62GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2026-05-17 15:46:16.458357: W external/xla/xla/service/gpu/autotuning/dot_search_space.cc:200] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs?Working around this by using the full hints set instead.
+epoch	0	loss	2.959712028503418
+epoch	5	loss	2.237060308456421
+epoch	10	loss	1.8705034255981445
+epoch	15	loss	1.6804213523864746
+epoch	20	loss	1.5271275043487549
+epoch	25	loss	1.3955082893371582
+epoch	30	loss	1.2686454057693481
+epoch	35	loss	1.1530375480651855
+epoch	40	loss	1.0417627096176147
+epoch	45	loss	0.9384848475456238
+epoch	50	loss	0.8419510722160339
+epoch	55	loss	0.7526927590370178
+epoch	60	loss	0.6696661710739136
+epoch	65	loss	0.5926827192306519
+epoch	70	loss	0.5255495309829712
+epoch	75	loss	0.4626084268093109
+epoch	80	loss	0.40857309103012085
+epoch	85	loss	0.36038482189178467
+epoch	90	loss	0.317989706993103
+epoch	95	loss	0.2799450159072876
+epoch	100	loss	0.2478247731924057
+epoch	105	loss	0.2187345027923584
+epoch	110	loss	0.19473761320114136
+epoch	115	loss	0.17350628972053528
+epoch	120	loss	0.15599718689918518
+epoch	125	loss	0.1401972472667694
+epoch	130	loss	0.126865416765213
+epoch	135	loss	0.1144302636384964
+epoch	140	loss	0.10495885461568832
+epoch	145	loss	0.09484957903623581
+epoch	150	loss	0.08708230406045914
+epoch	155	loss	0.08067380636930466
+epoch	160	loss	0.07430258393287659
+epoch	165	loss	0.06915044039487839
+epoch	170	loss	0.06451238691806793
+epoch	175	loss	0.06118395924568176
+epoch	180	loss	0.05585537105798721
+epoch	185	loss	0.05243615433573723
+epoch	190	loss	0.04976336285471916
+epoch	195	loss	0.04641900956630707
+epoch	200	loss	0.04469023272395134
+epoch 200 saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1779025393/state_200
+2026-05-17 19:24:45.014705: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 4.71GiB (5052111932 bytes) by rematerialization; only reduced to 4.95GiB (5313530812 bytes), down from 5.50GiB (5901606092 bytes) originally
+epoch	205	loss	0.04212326928973198
+epoch	210	loss	0.039690058678388596
+epoch	215	loss	0.03856142982840538
+epoch	220	loss	0.03644075617194176
+epoch	225	loss	0.036047063767910004
+epoch	230	loss	0.03372527286410332
+epoch	235	loss	0.03376112878322601
+epoch	240	loss	0.03153425455093384
+epoch	245	loss	0.03070882335305214
+epoch	250	loss	0.029589934274554253
+epoch	255	loss	0.027823183685541153
+epoch	260	loss	0.027457335963845253
+epoch	265	loss	0.026637600734829903
+epoch	270	loss	0.026490459218621254
+epoch	275	loss	0.02583429589867592
+epoch	280	loss	0.024665221571922302
+epoch	285	loss	0.024434003978967667
+epoch	290	loss	0.02448231168091297
+epoch	295	loss	0.024260949343442917
+epoch	300	loss	0.023290280252695084
+epoch	305	loss	0.023771757259964943
+epoch	310	loss	0.0239268708974123
+epoch	315	loss	0.02277071587741375
+epoch	320	loss	0.022683823481202126
+epoch	325	loss	0.022727282717823982
+epoch	330	loss	0.022256912663578987
+epoch	335	loss	0.022666458040475845
+epoch	340	loss	0.022532986477017403
+epoch	345	loss	0.02299165166914463
+epoch	350	loss	0.02237418293952942
+epoch	355	loss	0.022904766723513603
+epoch	360	loss	0.02258520945906639
+epoch	365	loss	0.022077184170484543
+epoch	370	loss	0.022487981244921684
+epoch	375	loss	0.02243935316801071
+epoch	380	loss	0.022472582757472992
+epoch	385	loss	0.022635556757450104
+epoch	390	loss	0.022607672959566116
+epoch	395	loss	0.022764699533581734
+^[[Aepoch	400	loss	0.02270231768488884
+epoch 400 saved checkpoint to: /home/klyx/git/p10/P10/cnn_data_set_2/model_fft/1779025393/state_400
+2026-05-17 23:03:12.866407: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 4.71GiB (5052111932 bytes) by rematerialization; only reduced to 4.95GiB (5313530812 bytes), down from 5.50GiB (5901606092 bytes) originally
+epoch	405	loss	0.02337729185819626
+^CTraceback (most recent call last):
+  File "/home/klyx/git/p10/P10/cnn_data_set_2/cnn_big_big.py", line 277, in <module>
+    idx = int(shuffled_indices[im_tr])
+  File "/home/klyx/.local/lib/python3.10/site-packages/jax/_src/array.py", line 314, in __int__
+    return self._value.__int__()
+  File "/home/klyx/.local/lib/python3.10/site-packages/jax/_src/profiler.py", line 354, in wrapper
+    return func(*args, **kwargs)
+  File "/home/klyx/.local/lib/python3.10/site-packages/jax/_src/array.py", line 644, in _value
+    npy_value, did_copy = self._single_device_array_to_np_array_did_copy()
+KeyboardInterrupt
+
