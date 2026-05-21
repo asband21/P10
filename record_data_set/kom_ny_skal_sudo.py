@@ -23,75 +23,57 @@ if len(sys.argv) == 2:
     print(f" post fix {post_fix}")
 
 RATE = 384000
-SECONDS = 0.2
+SECONDS = 0.1
 PERIODSIZE = 1024
 FILE = "chunk.wav"
 
-device_l=""
-device_l="hw:CARD=Microphone_1,DEV=0"
-device_h="hw:CARD=Microphone,DEV=0"
-#device_l="plughw:CARD=Microphone,DEV=0"
-#device_l="plughw:CARD=Microphone_1,DEV=0"
-#device_l="sysdefault:CARD=Microphone_1"
-#device_l="front:CARD=Microphone_1,DEV=0"
-#device_l="dsnoop:CARD=Microphone_1,DEV=0"
-#device_l="hw:CARD=Microphone,DEV=0"
-#device_l="plughw:CARD=Microphone,DEV=0"
-#device_l="sysdefault:CARD=Microphone"
-#device_l="front:CARD=Microphone,DEV=0"
-#device_l="dsnoop:CARD=Microphone,DEV=0"
+device="two_mics"
 
-
-left_mick = alsaaudio.PCM(
+micks = alsaaudio.PCM(
     type=alsaaudio.PCM_CAPTURE,
-    device=device_l,
-    channels=1,
-    rate=RATE,
-    format=alsaaudio.PCM_FORMAT_S16_LE,
-    periodsize=PERIODSIZE,
-)
-
-right_mick = alsaaudio.PCM(
-    type=alsaaudio.PCM_CAPTURE,
-    device=device_h,
-    channels=1,
+    device=device,
+    channels=2,
     rate=RATE,
     format=alsaaudio.PCM_FORMAT_S16_LE,
     periodsize=PERIODSIZE,
 )
 
 
-for iii in range(10):
-    chunks_l = []
-    chunks_h = []
+for iii in range(100):
+    chunks = []
     num_reads = int(RATE * SECONDS / PERIODSIZE)
-
-    try:
-        for i in range(num_reads):
-            length_l, data_l = left_mick.read()
-            length_h, data_h = right_mick.read()
-            if length_l > 0 and length_h > 0:
-                chunks_l.append(np.frombuffer(data_l, dtype=np.int16))
-                chunks_h.append(np.frombuffer(data_h, dtype=np.int16))
-            if i == 1:
-                lgpio.gpio_write(h, GPIO_LINE, 1)
-    except:
-        lgpio.gpio_write(h, GPIO_LINE, 0)
-        print(iii)
-        time.sleep(0.2)
-        continue
+    
+    for _ in range(4):
+        micks.read()
+    
+    #try:
+    lgpio.gpio_write(h, GPIO_LINE, 1)
+    for i in range(num_reads):
+        length, data = micks.read()
+        chunks.append(np.frombuffer(data, dtype=np.int16))
+        #chunks.append(data)
+            #if length > 0:
+            #    chunks.append(np.frombuffer(data, dtype=np.int16))
+    #except:
+    #    lgpio.gpio_write(h, GPIO_LINE, 0)
+    #    print(iii)
+    #    time.sleep(0.2)
+    #    continue
+    # Combine raw ALSA byte buffers after recording
+    #raw_audio = b"".join(chunks)
+    # Convert after recording, not inside the read loop
+    #audio = np.frombuffer(raw_audio, dtype=np.int16)
+    #audio = audio.reshape(-1, 2)
+    # gpio lown
+    #chunks = np.array(chunks, dtype=np.int16)
 
     lgpio.gpio_write(h, GPIO_LINE, 0)
-    # gpio lown
-
-    audio_l = np.concatenate(chunks_l)
-    audio_h = np.concatenate(chunks_h)
-    wavfile.write(f"data_set_gpio/chunk_({device_l})_{post_fix}_{iii}_l.wav", RATE, audio_l)
-    wavfile.write(f"data_set_gpio/chunk_({device_l})_{post_fix}_{iii}_h.wav", RATE, audio_h)
+    audio = np.concatenate(chunks)
+    audio = audio.reshape(-1, 2)
+    wavfile.write(f"data_set_gpio/chunk_({device})_{post_fix}_{iii}_stero.wav", RATE, audio)
     time.sleep(0.2)
 
-left_mick.close()
-right_mick.close()
+micks.close()
 lgpio.gpiochip_close(h)
 
 
