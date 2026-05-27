@@ -1,0 +1,9 @@
+python3 make_data_set_csv.py data_set_rumba_2 >> data_set_rumba_2/error.txt
+python3 make_data_set_csv.py data_set_rumba_3 >> data_set_rumba_3/error.txt
+python3 make_data_set_csv.py data_set_rumba_4 >> data_set_rumba_4/error.txt
+python3 make_data_set_csv.py data_set_rumba_5 >> data_set_rumba_5/error.txt
+python3 make_data_set_csv.py data_set_rumba_6 >> data_set_rumba_6/error.txt
+python3 make_data_set_csv.py data_set_rumba_7 >> data_set_rumba_7/error.txt
+python3 make_data_set_csv.py data_set_rumba_8 >> data_set_rumba_8/error.txt
+python3 make_data_set_csv.py data_set_rumba_9 >> data_set_rumba_9/error.txt
+python3 make_data_set_csv.py data_set_rumba_10 >> data_set_rumba_10/error.txt
