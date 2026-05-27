@@ -39,7 +39,7 @@ micks = alsaaudio.PCM(
 )
 
 
-for iii in range(100):
+for iii in range(10):
     chunks = []
     num_reads = int(RATE * SECONDS / PERIODSIZE)
     
@@ -70,11 +70,10 @@ for iii in range(100):
     lgpio.gpio_write(h, GPIO_LINE, 0)
     audio = np.concatenate(chunks)
     audio = audio.reshape(-1, 2)
-    wavfile.write(f"data_set_gpio/chunk_({device})_{post_fix}_{iii}_stero.wav", RATE, audio)
+    wavfile.write(f"data_set_rumba/chunk_({device})_{post_fix}_record_{iii}_stero.wav", RATE, audio)
     time.sleep(0.2)
 
 micks.close()
 lgpio.gpiochip_close(h)
-
 
 #subprocess.run(["bash", "spektrum.sh"], check=True)
