@@ -51,18 +51,15 @@ n_f = 41668
 n_t = 360
 min_fri = 2000
 
-
-## lode model
+## inishilinge model 
 model = cnn(n_in_len = 197, n_in_hite = 97, n_targets=n_t, rngs=nnx.Rngs(0))
 nnx.display(model)  # Interactive display if penzai is installed.
-
+## lode model
 _, state = nnx.split(model)
-
 checkpointer = ocp.StandardCheckpointer()
 checkpoint_path = Path("./model_cnn_rumba/1779915706/state_last").resolve()
 state = checkpointer.restore(checkpoint_path, state)
 nnx.update(model, state)
-
 
 ## lode index
 rows = []
@@ -76,80 +73,70 @@ for i in range(2, 11):
     rows.extend(rows_m)
 
 key = jax.random.key(int(time.time()))
+char = 'y'
+while(char != 'x'):
+    key, k = jax.random.split(key)
+    r_i = jax.random.randint(k, shape=(), minval=0, maxval=len(rows))
 
-key, k = jax.random.split(key)
-r_i = jax.random.randint(k, shape=(), minval=0, maxval=len(rows))
+    paft_imges = rows[r_i][5]
+    paft_lidar = rows[r_i][4]
 
-paft_imges = rows[r_i][5]
-paft_lidar = rows[r_i][4]
+    ## lode audio
+    sr, audio_f = wavfile.read(paft_imges)                                                                                                                                                                         
+    if len(audio_f) != 37888:
+        print(len(audio_f))
+        os.exit(1)
 
-## lode audio
-sr, audio_f = wavfile.read(paft_imges)                                                                                                                                                                         
-if len(audio_f) != 37888:
-    print(len(audio_f))
-    os.exit(1)
+    chunk_size = math.ceil(sr / min_fri)  
+    audio_f = audio_f.astype("float32")
+    audio_f = audio_f / 32768.0
 
-chunk_size = math.ceil(sr / min_fri)  
-audio_f = audio_f.astype("float32")
-audio_f = audio_f / 32768.0
+    r = audio_f[:, 0]
+    l = audio_f[:, 1]
+    n_chunks_r = len(r) // chunk_size
+    n_chunks_l = len(l) // chunk_size
+    r = r[:n_chunks_r * chunk_size]
+    l = l[:n_chunks_l * chunk_size]
+    r_spl = jnp.array(r).reshape(n_chunks_r, chunk_size)
+    l_spl = jnp.array(l).reshape(n_chunks_l, chunk_size)
+    r_fft = jnp.abs(jnp.fft.rfft(r_spl, axis=-1)) #.flatten()
+    l_fft = jnp.abs(jnp.fft.rfft(l_spl, axis=-1)) #.flatten()
 
-r = audio_f[:, 0]
-l = audio_f[:, 1]
-n_chunks_r = len(r) // chunk_size
-n_chunks_l = len(l) // chunk_size
-r = r[:n_chunks_r * chunk_size]
-l = l[:n_chunks_l * chunk_size]
-r_spl = jnp.array(r).reshape(n_chunks_r, chunk_size)
-l_spl = jnp.array(l).reshape(n_chunks_l, chunk_size)
-r_fft = jnp.abs(jnp.fft.rfft(r_spl, axis=-1)) #.flatten()
-l_fft = jnp.abs(jnp.fft.rfft(l_spl, axis=-1)) #.flatten()
+    image = jnp.array([r_fft, l_fft])
+    image = image[None, ...]
+    image = jnp.transpose(image, (0, 2, 3, 1))   # shape: (1, chunks, fft_bins, 2)
 
-image = jnp.array([r_fft, l_fft])
-image = image[None, ...]
-image = jnp.transpose(image, (0, 2, 3, 1))   # shape: (1, chunks, fft_bins, 2)
+    ## lode lidar
+    lidar_data = []
+    with open(paft_lidar, "r") as f:
+        lidar_data = [ float(line) for line in f]
+    lidar = jnp.array(lidar_data)
 
+    ## run pridick
+    prediksen = model(image)
+    #print(f"{prediksen} = model({image})")
+    index = jnp.argmax(prediksen)
 
-## lode lidar
-lidar_data = []
-with open(paft_lidar, "r") as f:
-    lidar_data = [ float(line) for line in f]
-lidar = jnp.array(lidar_data)
+    ## zip data
+    polar_data = jnp.array([angels, lidar]).T
+    prediksen = jnp.squeeze(prediksen) # shape: (360,)
+    model_data = jnp.array([angels, prediksen]).T
 
+    ## Transform data
+    cartesian_data = to_cartesian(polar_data)
+    cartesian_model_data = to_cartesian(model_data)
 
+    x_vals = jnp.array(cartesian_data[:, 0])
+    y_vals = jnp.array(cartesian_data[:, 1])
+    x_vals_model = jnp.array(cartesian_model_data[:, 0])
+    y_vals_model = jnp.array(cartesian_model_data[:, 1])
 
-
-## run pridick
-prediksen = model(image)
-print(f"{prediksen} = model({image})")
-index = jnp.argmax(prediksen)
-
-## zip data
-polar_data = jnp.array([angels, lidar]).T
-#polar_data = jnp.squeeze(polar_data) # shape: (360,)
-
-prediksen = jnp.squeeze(prediksen) # shape: (360,)
-model_data = jnp.array([angels, prediksen]).T
-#model_data = jnp.squeeze(prediksen) # shape: (360,)
-
-## Transform data
-cartesian_data = to_cartesian(polar_data)
-cartesian_model_data = to_cartesian(model_data)
-
-## Plot data
-#x_vals = numpy.array(cartesian_data[:, 0])
-#y_vals = numpy.array(cartesian_data[:, 1])
-#x_vals_model = numpy.array(cartesian_model_data[:, 0])
-#y_vals_model = numpy.array(cartesian_model_data[:, 1])
-x_vals = jnp.array(cartesian_data[:, 0])
-y_vals = jnp.array(cartesian_data[:, 1])
-x_vals_model = jnp.array(cartesian_model_data[:, 0])
-y_vals_model = jnp.array(cartesian_model_data[:, 1])
-
-plt.figure()
-plt.scatter(x_vals, y_vals)
-plt.scatter(x_vals_model, y_vals_model)
-plt.xlabel("X")
-plt.ylabel("Y")
-plt.title("LiDAR XY Plot")
-plt.axis("equal")
-plt.show()
+    plt.figure()
+    plt.scatter(x_vals, y_vals)
+    plt.scatter(x_vals_model, y_vals_model)
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.title("LiDAR XY Plot")
+    plt.axis("equal")
+    plt.show()
+    #char = input("tryk 'x' for a stoppe:")
