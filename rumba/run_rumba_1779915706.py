@@ -48,12 +48,28 @@ class cnn(nnx.Module):
         return x
 angels = []
 for i in range(360):
-    angels.append(i)
+    angels.append(3.14*float(i)/180)
 angels = jnp.array(angels)
 
 n_f = 41668
 n_t = 360
 min_fri = 2000
+
+
+## lode model
+shape = jnp.shape(image)
+print(f"shape {shape}")
+# 197, 97
+model = cnn(n_in_len = 197, n_in_hite = 97, n_targets=n_t, rngs=nnx.Rngs(0))
+nnx.display(model)  # Interactive display if penzai is installed.
+
+_, state = nnx.split(model)
+
+checkpointer = ocp.StandardCheckpointer()
+checkpoint_path = Path("./model_cnn_rumba/1779915706/state_last").resolve()
+state = checkpointer.restore(checkpoint_path, state)
+nnx.update(model, state)
+
 
 ## lode index
 rows = []
@@ -67,6 +83,9 @@ for i in range(2, 11):
     rows.extend(rows_m)
 
 key = jax.random.key(int(time.time()))
+
+
+while():
 key, k = jax.random.split(key)
 r_i = jax.random.randint(k, shape=(), minval=0, maxval=len(rows))
 
@@ -105,35 +124,7 @@ with open(paft_lidar, "r") as f:
     lidar_data = [ float(line) for line in f]
 lidar = jnp.array(lidar_data)
 
-"""
-## lode audio
-sr, x = wavfile.read("data_set_2/"+paft)
-chunk_size = math.ceil(sr / min_fri)  
-x = x.astype("float32")
-x = x / 32768.0
 
-n_chunks = len(x) // chunk_size
-x = x[:n_chunks * chunk_size]
-x_spl = jnp.array(x).reshape(n_chunks, chunk_size)
-x_fft = jnp.abs(jnp.fft.rfft(x_spl, axis=-1)).flatten()
-
-if len(x_fft) != 41668:
-    print("Please, yeah, the length of the audio is not the right length. The loading went wrong. Please try another one.")
-    print("data_set/"+paft)
-    os.exit(1)
-"""
-
-## lode model
-shape = jnp.shape(image)
-model = cnn(n_in_len = shape[1], n_in_hite = shape[2], n_targets=n_t, rngs=nnx.Rngs(0))
-nnx.display(model)  # Interactive display if penzai is installed.
-
-_, state = nnx.split(model)
-
-checkpointer = ocp.StandardCheckpointer()
-checkpoint_path = Path("./model_cnn_rumba/1779915706/state_last").resolve()
-state = checkpointer.restore(checkpoint_path, state)
-nnx.update(model, state)
 
 
 ## run pridick
@@ -142,11 +133,11 @@ print(f"{prediksen} = model({image})")
 index = jnp.argmax(prediksen)
 
 ## zip data
-polar_data = jnp.array([angels, lidar])
+polar_data = jnp.array([angels, lidar]).T
 #polar_data = jnp.squeeze(polar_data) # shape: (360,)
 
 prediksen = jnp.squeeze(prediksen) # shape: (360,)
-model_data = jnp.array([angels, prediksen])
+model_data = jnp.array([angels, prediksen]).T
 #model_data = jnp.squeeze(prediksen) # shape: (360,)
 
 ## Transform data
