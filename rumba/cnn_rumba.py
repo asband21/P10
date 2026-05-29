@@ -75,7 +75,10 @@ def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batc
             lidar_data = [] 
             with open(i[4], "r") as f:
                 lidar_data = [ float(line) for line in f]
-            labels_bash.append(lidar_data)
+            lidar_data_beem = []
+            for num in range(-15,15,1):
+                lidar_data_beem.append(lidar_data[num])
+            labels_bash.append(lidar_data_beem)
         
 
         images_bash = np.asarray(images_bash, dtype=np.float32)
@@ -114,7 +117,7 @@ def parse_args():
     parser.add_argument("--minimum-fri", type=float, default=2000)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--n-features", type=int, default=41668)
-    parser.add_argument("--n-targets", type=int, default=360)
+    parser.add_argument("--n-targets", type=int, default=30)
     parser.add_argument("--hidden-size", type=int, default=1024)
     parser.add_argument("--data-frak", type=int, default=1)
     parser.add_argument("--model", type=str, default=None)
@@ -139,7 +142,7 @@ def train_step( model: nnx.Module, optimizer: nnx.Optimizer, data: jax.Array, la
     optimizer.update(grads)  # inplace update
 
 class cnn(nnx.Module):
-    def __init__(self, n_in_len: int = 300, n_in_hite: int = 64, n_in_deeb: int = 2, n_hidden: int = 1024, n_targets: int = 360, kn_size: int = 5,  *, rngs: nnx.Rngs):
+    def __init__(self, n_in_len: int = 300, n_in_hite: int = 64, n_in_deeb: int = 2, n_hidden: int = 1024, n_targets: int = 30, kn_size: int = 5,  *, rngs: nnx.Rngs):
         self.layer1 = nnx.Conv(in_features=n_in_deeb, out_features=32, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer2 = nnx.Conv(in_features=32, out_features=32, kernel_size=(5,5),  padding='VALID', rngs=rngs)
         self.layer3 = nnx.Conv(in_features=32, out_features=32, kernel_size=(5,5),  padding='VALID', rngs=rngs)
@@ -251,7 +254,8 @@ for epoch in range(epoch):
         print(f"epoch\t{epoch}\tloss\t{loss_sum/len(images_test)}")
 
     #if epoch in {100, 200, 300, 400}: # save model
-    if epoch in {200, 400, 600, 800}: # save model
+    #if epoch in {200, 400, 600, 800}: # save model
+    if epoch in {400, 800, 1500}: # save model
         _, state = nnx.split(model)
         state_cpu = jax.device_get(state)
         ckpt_path = run_dir / f"state_{epoch}"
