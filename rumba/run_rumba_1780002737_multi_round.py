@@ -43,7 +43,8 @@ class cnn(nnx.Module):
         return x
 
 angels = []
-for i in range(360):
+#for i in range(360):
+for i in range(-15,15,1):
     angels.append(3.14*float(i)/180)
 angels = jnp.array(angels)
 
