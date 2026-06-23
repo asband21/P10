@@ -18,7 +18,7 @@ import orbax.checkpoint as ocp
 def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batch_size: int = 64, d: int = 1):
     ## make index to data
     rows = []
-    for i in range(2, 11):
+    for i in range(2, 14):
         with open(f"data_set_rumba/data_set_rumba_{i}/master_dataset_index.csv", "r") as f:
             #print(f)
             rows_m = [line.strip().split("\t") for line in f]
@@ -76,10 +76,21 @@ def lode_data(split: float = 0.1, min_fri: float = 20000, seed: int = 5212, batc
             with open(i[4], "r") as f:
                 lidar_data = [ float(line) for line in f]
             lidar_data_beem = []
-            for num in range(-15,15,1):
+            for num in range(-45,45,1):
                 lidar_data_beem.append(lidar_data[num])
-            labels_bash.append(lidar_data_beem)
-        
+
+            pix_sum_num = 5
+            lidar_data_beem_len = int(math.floor((len(lidar_data_beem)/pix_sum_num)))
+            #print(f"lidar_data_beem_len: {lidar_data_beem_len}")
+            lidar_data_beem_kom = []
+            for index_ldbl in range(lidar_data_beem_len):    
+                kom_num = 0
+                for pix_j in range(pix_sum_num):
+                    kom_num = lidar_data_beem[pix_j + index_ldbl]/pix_sum_num
+                    #print(lidar_data_beem[pix_j + index_ldbl])
+                lidar_data_beem_kom.append(kom_num) 
+                #print(kom_num)
+            labels_bash.append(lidar_data_beem_kom)
 
         images_bash = np.asarray(images_bash, dtype=np.float32)
         #print(np.shape(images_bash))
@@ -113,11 +124,11 @@ def parse_args():
     parser.add_argument("--noise", type=float, default=0.0002)
     parser.add_argument("--learning-rate", "--lr", type=float, default=0.0000004)
     parser.add_argument("--batch-size", type=int, default=126)
-    parser.add_argument("--epochs", type=int, default=256 * 4)
+    parser.add_argument("--epochs", type=int, default=256 * 4 * 3)
     parser.add_argument("--minimum-fri", type=float, default=2000)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--n-features", type=int, default=41668)
-    parser.add_argument("--n-targets", type=int, default=30)
+    parser.add_argument("--n-targets", type=int, default=18)
     parser.add_argument("--hidden-size", type=int, default=1024)
     parser.add_argument("--data-frak", type=int, default=1)
     parser.add_argument("--model", type=str, default=None)
@@ -254,7 +265,7 @@ for epoch in range(epoch):
         print(f"epoch\t{epoch}\tloss\t{loss_sum/len(images_test)}")
 
     #if epoch in {100, 200, 300, 400}: # save model
-    if epoch in {3000, 4000, 6000}: # save model
+    if epoch in {1000, 2000}: # save model
         _, state = nnx.split(model)
         state_cpu = jax.device_get(state)
         ckpt_path = run_dir / f"state_{epoch}"
